@@ -56,20 +56,7 @@ const TabNavigator = () => {
           ),
         }}
       />
-      <Tab.Screen
-        name="Bible"
-        component={HomeNavigator}
-        options={{
-          tabBarLabel: 'Bible',
-          tabBarIcon: ({ color, size }) => (
-            <FontAwesome5
-              name="bible"
-              color={color}
-              size={size}
-            />
-          ),
-        }}
-      />
+
       <Tab.Screen
         name="Events"
         component={EventsNavigator}

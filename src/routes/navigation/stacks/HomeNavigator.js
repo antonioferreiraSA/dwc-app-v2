@@ -5,7 +5,7 @@ import { HomeTitleContext } from '../../../context/HomeTitleContext'
 import { ColorSchemeContext } from '../../../context/ColorSchemeContext'
 import { lightProps, darkProps } from './navigationProps/navigationProps'
 import HeaderStyle from './headerComponents/HeaderStyle'
-
+import CustomDrawerContent from './Drawer/Menu'
 import Home from '../../../scenes/home'
 import Detail from '../../../scenes/detail'
 import Profile from '../../../scenes/profile'
@@ -72,12 +72,14 @@ const DrawerNavigator = () => {
   const navigationProps = scheme === 'dark' ? darkProps:lightProps
   const { scheme } = useContext(ColorSchemeContext)
   return (
-    <Drawer.Navigator>
+    <Drawer.Navigator
+    style={{ flex: 1 }}
+      drawerContent={(props) => <CustomDrawerContent {...props} />}
+    >
       <Drawer.Screen
       name="Home"
       component={HomeStack}
       options={({ navigation }) => ({
-
         headerBackground: scheme === 'dark' ? null: () => <HeaderStyle />,
       })}
       />
