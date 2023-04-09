@@ -11,7 +11,7 @@ import { Entypo } from '@expo/vector-icons';
 // New Screens from echo.church
 import Give from '../../../scenes/Give'
 import Connect from '../../../scenes/connect'
-
+import { EventsNavigator } from '../stacks/EventsNavigator'
 // stack navigators
 import { HomeNavigator, ProfileNavigator, ConnectNavigator, MoreNavigator   } from '../stacks'
 
@@ -71,6 +71,19 @@ const TabNavigator = () => {
         }}
       />
       <Tab.Screen
+        name="Events"
+        component={EventsNavigator}
+        options={{
+          tabBarLabel: 'Events',
+          tabBarIcon: ({ color, size }) => (
+            <EventsLogo
+              color={color}
+              size={size}
+            />
+          ),
+        }}
+      />
+      <Tab.Screen
         name="ConnectTab"
         component={ConnectNavigator}
         options={{
@@ -96,20 +109,8 @@ const TabNavigator = () => {
           ),
         }}
       />
-      <Tab.Screen
-        name="More"
-        component={MoreNavigator}
-        options={{
-          tabBarLabel: 'More',
-          tabBarIcon: ({ color, size }) => (
-            <Entypo
-              name="dots-three-horizontal"
-              color={color}
-              size={size}
-            />
-          ),
-        }}
-      />
+
+
 
     </Tab.Navigator>
   )

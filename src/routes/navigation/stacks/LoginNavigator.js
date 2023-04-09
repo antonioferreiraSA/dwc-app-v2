@@ -6,6 +6,7 @@ import HeaderStyle from './headerComponents/HeaderStyle'
 
 import Login from '../../../scenes/login'
 import Registration from '../../../scenes/registration'
+import ResetPassword from '../../../scenes/ResetPassword/RestPassword'
 
 const Stack = createStackNavigator()
 
@@ -30,6 +31,14 @@ export const LoginNavigator = () => {
           headerBackground: scheme === 'dark' ? null: () => <HeaderStyle />,
         })}
       />
+      <Stack.Screen
+      name="RestPassword"
+      component={ResetPassword}
+      options={({ navigation }) => ({
+        headerShown: false,
+        headerBackground: scheme === 'dark' ? null: () => <HeaderStyle />,
+      })}
+    />
     </Stack.Navigator>
   )
 }

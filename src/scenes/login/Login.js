@@ -33,6 +33,9 @@ export default function Login() {
   const onFooterLinkPress = () => {
     navigation.navigate('Registration')
   }
+  const RestPress = () => {
+    navigation.navigate('RestPassword')
+  }
 
   useEffect(() => {
     console.log('Login screen, ログイン画面')
@@ -95,9 +98,7 @@ export default function Login() {
             {paddingHorizontal: 35, backgroundColor: 'transparent'},
             ]}>
           <TouchableOpacity
-              onPress={() =>
-                Linking.openURL('https://auth.ovex.io/accounts/password/new')
-              }>
+            onPress={RestPress}>
               <Text font="regular" style={styles.footerLink2}>
                 Forgot sign in details?{' '}
               </Text>

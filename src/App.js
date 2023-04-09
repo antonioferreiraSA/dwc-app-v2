@@ -4,6 +4,7 @@ import { Provider } from 'jotai'
 import 'utils/ignore'
 import { ColorSchemeContextProvider } from './context/ColorSchemeContext'
 import { UserDataContextProvider } from './context/UserDataContext'
+import registerNNPushToken from 'native-notify';
 
 // assets
 import { imageAssets } from 'theme/images'
@@ -13,6 +14,7 @@ import Router from './routes'
 const isHermes = () => !!global.HermesInternal;
 
 const App = () => {
+  registerNNPushToken(7236, 'JmMhqdh3jWpAtJYIERAvgg');
   // state
   const [didLoad, setDidLoad] = useState(false)
   console.log('isHermes', isHermes())

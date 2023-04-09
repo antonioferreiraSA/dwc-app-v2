@@ -14,6 +14,7 @@ import { ColorSchemeContext } from '../../context/ColorSchemeContext'
 import { defaultAvatar, eulaLink } from '../../config'
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../../firebase/config'
+import { showToast } from '../../utils/ShowToast'
 
 export default function Registration() {
   const [fullName, setFullName] = useState('')
@@ -36,6 +37,14 @@ export default function Registration() {
     navigation.navigate('Login')
   }
 
+  const onShowToastPress = () => {
+    showToast({
+      title: 'Hello',
+      body: ' 👋  Welcome to Destiny Worship Centre',
+      isDark
+    })
+  }
+
   const onRegisterPress = async() => {
     if (password !== confirmPassword) {
       alert("Passwords don't match.")
@@ -53,6 +62,7 @@ export default function Registration() {
       };
       const usersRef = doc(firestore, 'users', uid);
       await setDoc(usersRef, data)
+      onShowToastPress()
     } catch(e) {
       setSpinner(false)
       alert(e)
@@ -93,12 +103,19 @@ export default function Registration() {
           value={confirmPassword}
           autoCapitalize="none"
         />
-        <Text style={[styles.link, {color: colorScheme.text}]} onPress={ ()=>{ Linking.openURL(eulaLink)}}> By creating an account, you declare that you have read and agree
+        <Text style={[styles.link, {color: colorScheme.text}]} onPress={() =>
+          Linking.openURL(
+            'https://mobile.destinyworshipcentre.co.za/wp-content/uploads/2023/03/Privacy-Policy-Destiny-Worship-Centre-Church-1.pdf',
+          )
+        }> By creating an account, you declare that you have read and agree
         to the{' '}<Text style={styles.eulaLink}>DWC Terms and conditions</Text></Text>
         <Button
           label='Agree and Create account'
           color={colors.primary}
-          onPress={() => onRegisterPress()}
+          onPress={() => {
+            onRegisterPress()
+
+          }}
         />
         <View style={styles.footerView}>
           <Text style={[styles.footerText, {color: colorScheme.text}]}>Already got an account? <Text onPress={onFooterLinkPress} style={styles.footerLink}>Log in</Text></Text>

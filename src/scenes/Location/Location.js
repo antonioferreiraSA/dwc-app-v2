@@ -51,8 +51,8 @@ const Location = () => {
 
 
   return (
-    <View >
-        <ScrollView>
+    <View   >
+        <ScrollView >
         <TouchableHighlight
 
                 onPress={() => openMaps('NSJ')}
@@ -64,14 +64,7 @@ const Location = () => {
           />
           </TouchableHighlight>
           <View style={[styles.container]}>
-            <Button
-              title="Watch Church Online"
-              style={styles.button}
-              onPress={() => {
-                logEvent('TAP Baptism Interested');
-                navigation.navigate('YouTube Page'); // navigate to BaptismForm screen
-              }}
-            />
+
 
             <Title center style={styles.heading}>
              Destiny Worship Center location & regular service time

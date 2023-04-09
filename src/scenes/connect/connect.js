@@ -105,6 +105,7 @@ const Connect = ({ navigation }) => {
             style={styles.checkIn2}
             onPress={openYoutubeApp}
           />
+
         </ScrollView>
       </View>
     </View>

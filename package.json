@@ -44,6 +44,7 @@
     "jotai": "^1.7.8",
     "lottie-react-native": "5.1.4",
     "moment": "^2.24.0",
+    "native-notify": "^3.0.4",
     "patch-package": "^6.4.7",
     "react": "18.2.0",
     "react-dom": "18.2.0",
