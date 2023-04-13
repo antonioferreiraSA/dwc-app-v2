@@ -14,6 +14,8 @@ import Connect from '../../../scenes/connect'
 import { EventsNavigator } from '../stacks/EventsNavigator'
 // stack navigators
 import { HomeNavigator, ProfileNavigator, ConnectNavigator, MoreNavigator   } from '../stacks'
+import { FollowNavigator } from '../stacks/topTabStacks/FollowNavigator';
+import {SermonNavigator} from '../stacks/SermonNavigator'
 
 
 const Tab = createBottomTabNavigator()
@@ -62,6 +64,19 @@ const TabNavigator = () => {
         component={EventsNavigator}
         options={{
           tabBarLabel: 'Events',
+          tabBarIcon: ({ color, size }) => (
+            <EventsLogo
+              color={color}
+              size={size}
+            />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Sermon"
+        component={SermonNavigator}
+        options={{
+          tabBarLabel: 'Sermon',
           tabBarIcon: ({ color, size }) => (
             <EventsLogo
               color={color}

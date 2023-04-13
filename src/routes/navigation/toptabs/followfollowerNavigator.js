@@ -4,7 +4,7 @@ import { screenOptions } from './navigationProps/navigationProps'
 
 import { FollowNavigator } from '../stacks/topTabStacks/FollowNavigator'
 import { FollowerNavigator } from '../stacks/topTabStacks/FollowerNavigator'
-
+import {LatestVideosScreen} from '../../../scenes/Youtube/LatestVideosScreen'
 const Tab = createMaterialTopTabNavigator()
 
 export const FollowFollowerNavigator = () => {
@@ -16,12 +16,12 @@ export const FollowFollowerNavigator = () => {
       <Tab.Screen
         name="FollowTab"
         component={FollowNavigator}
-        options={{ tabBarLabel: 'Follow' }}
+        options={{ tabBarLabel: 'Recent Sermon' }}
       />
       <Tab.Screen
         name="FollowerTab"
         component={FollowerNavigator}
-        options={{ tabBarLabel: 'Follower' }}
+        options={{ tabBarLabel: 'Previous Sermon' }}
       />
     </Tab.Navigator>
   )

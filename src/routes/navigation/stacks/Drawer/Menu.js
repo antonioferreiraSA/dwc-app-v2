@@ -7,12 +7,19 @@ import { Avatar } from '@rneui/themed';
 import { UserDataContext } from '../../../../context/UserDataContext'
 import nowTheme from './constants/Theme';
 import { AntDesign } from '@expo/vector-icons';
-
+import { ColorSchemeContext } from '../../../../context/ColorSchemeContext'
 const { width } = Dimensions.get('screen');
+import { colors } from '../../../../theme';
 
 // eslint-disable-next-line react/prop-types
 function CustomDrawerContent({ drawerPosition, navigation, profile, focused, state, ...rest }) {
   const insets = useSafeArea();
+  const { scheme } = useContext(ColorSchemeContext)
+  const isDark = scheme === 'dark'
+  const colorScheme = {
+    content: isDark? styles.darkContent : styles.lightContent,
+    text: isDark? colors.white : colors.primaryText
+  }
   const { userData } = useContext(UserDataContext)
   const screens = ['Home', 'Components', 'Articles', 'Profile', 'Account'];
   return (
@@ -50,7 +57,7 @@ function CustomDrawerContent({ drawerPosition, navigation, profile, focused, sta
               }}
             />
             <Text
-              color={nowTheme.COLORS.BLACK}
+              color={colorScheme.text}
               style={{
                 marginTop: 30,
                 marginLeft: 20,
@@ -88,6 +95,7 @@ const styles = StyleSheet.create({
     height: 40,
     width: 37,
     tintColor: 'black',
+
   },
 });
 

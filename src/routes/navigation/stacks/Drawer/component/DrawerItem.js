@@ -2,12 +2,15 @@ import { Block, Text, theme } from 'galio-framework';
 import { Linking, StyleSheet, TouchableOpacity } from 'react-native';
 
 import Icon from './Icon';
-import React from 'react';
+import React, { useEffect, useState, useContext, useLayoutEffect }  from 'react';
 import nowTheme from '../constants/Theme';
+import { colors } from '../../../../../theme';
+import { ColorSchemeContext } from '../../../../../context/ColorSchemeContext'
 
 class DrawerItem extends React.Component {
   renderIcon = () => {
     const { title, focused } = this.props;
+
 
     switch (title) {
       case 'Home':
@@ -16,7 +19,7 @@ class DrawerItem extends React.Component {
             name="app2x"
             family="NowExtra"
             size={18}
-            color={focused ? nowTheme.COLORS.PRIMARY : 'black'}
+            color={focused ? nowTheme.COLORS.PRIMARY : '#fff'}
             style={{ opacity: 0.5 }}
           />
         );
@@ -26,7 +29,7 @@ class DrawerItem extends React.Component {
             name="atom2x"
             family="NowExtra"
             size={18}
-            color={focused ? nowTheme.COLORS.PRIMARY : 'black'}
+            color={focused ? nowTheme.COLORS.PRIMARY : '#fff'}
             style={{ opacity: 0.5 }}
           />
         );
@@ -36,7 +39,7 @@ class DrawerItem extends React.Component {
             name="paper"
             family="NowExtra"
             size={18}
-            color={focused ? nowTheme.COLORS.PRIMARY : 'black'}
+            color={focused ? nowTheme.COLORS.PRIMARY : '#fff'}
             style={{ opacity: 0.5 }}
           />
         );

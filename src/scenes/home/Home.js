@@ -1,8 +1,6 @@
 import React, { useEffect, useState, useContext, useLayoutEffect } from 'react'
-import { Text, View, ScrollView, StyleSheet, Image, Dimensions } from 'react-native'
+import { Text, View, ScrollView, StyleSheet, Image, Dimensions, Modal, Pressable } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
-import IconButton from '../../components/IconButton'
-import ProfileIconButton from '../../components/ProfileIconButton'
 import ScreenTemplate from '../../components/ScreenTemplate'
 import Button from '../../components/Button'
 import { firestore } from '../../firebase/config'
@@ -13,8 +11,12 @@ import { UserDataContext } from '../../context/UserDataContext'
 import { ColorSchemeContext } from '../../context/ColorSchemeContext'
 import { sendNotification } from '../../utils/SendNotification'
 import { Avatar } from '@rneui/themed';
+import video from '../../../assets/loader.mp4'
+import axios from 'axios';
+import { Video, ResizeMode } from 'expo-av';
 
 export default function Home() {
+
 // blocks
 const SCREEN_WIDTH = Dimensions.get('window').width;
 
@@ -69,6 +71,7 @@ const SCREEN_WIDTH = Dimensions.get('window').width;
     return () => tokenListner()
   }, [])
 
+
   const onNotificationPress = async() => {
     const res = await sendNotification({
       title: 'Hello',
@@ -78,6 +81,8 @@ const SCREEN_WIDTH = Dimensions.get('window').width;
     })
     console.log(res)
   }
+
+
 
   return (
     <ScreenTemplate>
@@ -92,10 +97,20 @@ const SCREEN_WIDTH = Dimensions.get('window').width;
     />
     </View>
     </View>
+    <View style={styles.liveContainer} onPress={() => setModalVisible(true)}>
+    <View style={styles.live} >
+    <Image
+  source={require('../../../assets/images/banner.png')}
+  style={{ width: 200, height: 200 }}
+  resizeMode="contain"
+  onPress={() => setModalVisible(true)}
+/>
+</View>
 
 
 
-    <View style={styles.container}>
+    </View>
+    <View style={styles.container}  onPress={() => setModalVisible(true)} >
     <View style={styles.row}>
       <View style={styles.block}>
         <Image
@@ -166,6 +181,7 @@ const SCREEN_WIDTH = Dimensions.get('window').width;
             </> : null
           }
         </View>
+
         <Button
           label='Go to Detail'
           color={colors.primary}
@@ -192,6 +208,7 @@ const SCREEN_WIDTH = Dimensions.get('window').width;
         />
       </ScrollView>
     </ScreenTemplate>
+
   )
 }
 
@@ -284,7 +301,20 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: '#777',
   },
-
-  // test
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    backgroundColor: '#ecf0f1',
+  },
+  video: {
+    alignSelf: 'center',
+    width: 320,
+    height: 200,
+  },
+  buttons: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
 
 })

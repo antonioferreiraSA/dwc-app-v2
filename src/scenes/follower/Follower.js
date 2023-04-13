@@ -1,75 +1,72 @@
-import React, { useEffect, useContext, useState } from 'react'
-import { Text, View, StyleSheet } from 'react-native'
-import ScreenTemplate from '../../components/ScreenTemplate'
-import { colors, fontSize } from '../../theme'
-import { ColorSchemeContext } from '../../context/ColorSchemeContext'
-import Button from '../../components/Button'
-import { showToast } from '../../utils/ShowToast'
-import ShowSnackbar from '../../components/ShowSnackbar'
+import React, { useState, useEffect } from 'react';
+import { StyleSheet, Text, View, ScrollView, Image, TouchableOpacity } from 'react-native';
 
-export default function Follower() {
-  const { scheme } = useContext(ColorSchemeContext)
-  const [visible, setVisible] = useState(false)
-  const isDark = scheme === 'dark'
-  const colorScheme = {
-    text: isDark? colors.white : colors.primaryText
-  }
+const YOUTUBE_API_KEY = 'AIzaSyDYmZpJk2TlDycX5vGZcIbMeh3cDLKWggM';
+const CHANNEL_ID = 'UCJ3J0grUampl4mkzqoBWmAA';
+
+const VideosScreen = () => {
+  const [videos, setVideos] = useState([]);
 
   useEffect(() => {
-    console.log('Follower screen')
-  }, [])
-
-  const onDismissSnackBar = () => setVisible(false)
-
-  const onShowToastPress = () => {
-    showToast({
-      title: 'Hello',
-      body: 'This is some something 👋',
-      isDark
-    })
-  }
-
-  const onShowSnackbarPress = () => {
-    setVisible(true)
-  }
+    fetch(`https://www.googleapis.com/youtube/v3/search?key=${YOUTUBE_API_KEY}&channelId=${CHANNEL_ID}&part=snippet,id&order=date&maxResults=50`)
+      .then(response => response.json())
+      .then(data => {
+        const recentVideos = data.items.slice(0, 10);
+        const allVideos = data.items.slice(10);
+        const recentVideosData = recentVideos.map(item => ({
+          id: item.id.videoId,
+          title: item.snippet.title,
+          thumbnail: item.snippet.thumbnails.medium.url,
+        }));
+        const allVideosData = allVideos.map(item => ({
+          id: item.id.videoId,
+          title: item.snippet.title,
+          thumbnail: item.snippet.thumbnails.medium.url,
+        }));
+        setVideos([...allVideosData, ...recentVideosData]);
+      });
+  }, []);
 
   return (
-    <>
-    <ScreenTemplate>
-      <View style={styles.container}>
-        <View style={{width:'100%'}}>
-          <Text style={[styles.field, {color: colorScheme.text}]}>Follower Screen</Text>
-          <Button
-            label='Show Toast'
-            color={colors.lightPurple}
-            onPress={onShowToastPress}
-          />
-          <Button
-            label='Show Snackbar'
-            color={colors.purple}
-            onPress={onShowSnackbarPress}
-          />
-        </View>
-      </View>
-    </ScreenTemplate>
-    <ShowSnackbar
-      visible={visible}
-      onDismissSnackBar={onDismissSnackBar}
-      title='Hello 👋'
-      duration={3000}
-    />
-    </>
-  )
-}
+    <View style={styles.container}>
+      <Text style={styles.heading}>All Videos (excluding recent 10)</Text>
+      <ScrollView contentContainerStyle={styles.scrollViewContainer}>
+        {videos.map(video => (
+          <TouchableOpacity key={video.id} style={styles.videoBlock}>
+            <Text style={styles.videoTitle}>{video.title}</Text>
+            <Image source={{ uri: video.thumbnail }} style={styles.videoThumbnail} />
+          </TouchableOpacity>
+        ))}
+      </ScrollView>
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+    padding: 20,
   },
-  field: {
-    fontSize: fontSize.middle,
-    textAlign: 'center',
+  heading: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 20,
   },
-})
+  scrollViewContainer: {
+    paddingBottom: 20,
+  },
+  videoBlock: {
+    marginBottom: 20,
+  },
+  videoTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 10,
+  },
+  videoThumbnail: {
+    width: '100%',
+    aspectRatio: 16 / 9,
+  },
+});
+
+export default VideosScreen;
