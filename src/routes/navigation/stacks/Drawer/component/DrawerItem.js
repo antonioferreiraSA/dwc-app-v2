@@ -19,30 +19,21 @@ class DrawerItem extends React.Component {
             name="app2x"
             family="NowExtra"
             size={18}
-            color={focused ? nowTheme.COLORS.PRIMARY : '#fff'}
+            color={focused ? nowTheme.COLORS.PRIMARY : 'black'}
             style={{ opacity: 0.5 }}
           />
         );
-      case 'Components':
+      case 'Sunday School':
         return (
           <Icon
             name="atom2x"
             family="NowExtra"
             size={18}
-            color={focused ? nowTheme.COLORS.PRIMARY : '#fff'}
+            color={focused ? nowTheme.COLORS.PRIMARY : 'black'}
             style={{ opacity: 0.5 }}
           />
         );
-      case 'Articles':
-        return (
-          <Icon
-            name="paper"
-            family="NowExtra"
-            size={18}
-            color={focused ? nowTheme.COLORS.PRIMARY : '#fff'}
-            style={{ opacity: 0.5 }}
-          />
-        );
+
       case 'Profile':
         return (
           <Icon
@@ -53,7 +44,7 @@ class DrawerItem extends React.Component {
             style={{ opacity: 0.5 }}
           />
         );
-      case 'Account':
+      case 'Tecnical Support':
         return (
           <Icon
             name="badge2x"
@@ -82,26 +73,7 @@ class DrawerItem extends React.Component {
             color={focused ? nowTheme.COLORS.PRIMARY : 'black'}
           />
         );
-      case 'GETTING STARTED':
-        return (
-          <Icon
-            name="spaceship2x"
-            family="NowExtra"
-            size={18}
-            style={{ borderColor: 'rgba(0,0,0,0.5)', opacity: 0.5 }}
-            color={focused ? nowTheme.COLORS.PRIMARY : 'black'}
-          />
-        );
-      case 'LOGOUT':
-        return (
-          <Icon
-            name="share"
-            family="NowExtra"
-            size={18}
-            style={{ borderColor: 'rgba(0,0,0,0.5)', opacity: 0.5 }}
-            color={focused ? nowTheme.COLORS.PRIMARY : 'black'}
-          />
-        );
+
       default:
         return null;
     }
@@ -118,13 +90,7 @@ class DrawerItem extends React.Component {
     return (
       <TouchableOpacity
         style={{ height: 60 }}
-        onPress={() =>
-          title == 'GETTING STARTED'
-            ? Linking.openURL('https://demos.creative-tim.com/now-ui-pro-react-native/docs/').catch(
-                (err) => console.error('An error occurred', err)
-              )
-            : navigation.navigate(title == 'LOGOUT' ? 'Onboarding' : title)
-        }
+
       >
         <Block flex row style={containerStyles}>
           <Block middle flex={0.1} style={{ marginRight: 5 }}>

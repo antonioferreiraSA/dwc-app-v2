@@ -4,7 +4,6 @@ import { ProfileNavigator } from "./ProfileNavigator"
 import { ConnectNavigator } from "./ConnectNavigator"
 import { MoreNavigator } from "./MoreNavigator"
 import { GivingNavigator } from "./GivingNavigator"
-
 export {
   LoginNavigator,
   HomeNavigator,

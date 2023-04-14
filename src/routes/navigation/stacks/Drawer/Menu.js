@@ -12,7 +12,7 @@ const { width } = Dimensions.get('screen');
 import { colors } from '../../../../theme';
 
 // eslint-disable-next-line react/prop-types
-function CustomDrawerContent({ drawerPosition, navigation, profile, focused, state, ...rest }) {
+function CustomDrawerContent({ drawerPosition, handleItemPress,navigation, profile, focused, state, ...rest }) {
   const insets = useSafeArea();
   const { scheme } = useContext(ColorSchemeContext)
   const isDark = scheme === 'dark'
@@ -21,19 +21,17 @@ function CustomDrawerContent({ drawerPosition, navigation, profile, focused, sta
     text: isDark? colors.white : colors.primaryText
   }
   const { userData } = useContext(UserDataContext)
-  const screens = ['Home', 'Components', 'Articles', 'Profile', 'Account'];
+  const screens = ['Home', 'Sunday School', 'Profile', 'Tecnical Support'];
   return (
     <Block style={styles.container} forceInset={{ top: 'always', horizontal: 'never' }}>
       <Block style={styles.header}>
       <Avatar
-      size="32"
+      size="medium"
       rounded
       title="NI"
       source={{ uri: userData.avatar }}
     />
-        <Block right style={styles.headerIcon}>
-        <AntDesign name="book" size={24} color="black" />
-        </Block>
+
       </Block>
       <Block flex style={{ paddingLeft: 8, paddingRight: 14 }}>
         <ScrollView style={{ flex: 1 }} showsVerticalScrollIndicator={false}>
@@ -44,34 +42,13 @@ function CustomDrawerContent({ drawerPosition, navigation, profile, focused, sta
                 key={index}
                 navigation={navigation}
                 focused={state.index === index ? true : false}
+                onPress={handleItemPress}
               />
             );
           })}
-          <Block flex style={{ marginTop: 24, marginVertical: 8, paddingHorizontal: 8 }}>
-            <Block
-              style={{
-                borderColor: 'black',
-                width: '93%',
-                borderWidth: StyleSheet.hairlineWidth,
-                marginHorizontal: 10,
-              }}
-            />
-            <Text
-              color={colorScheme.text}
-              style={{
-                marginTop: 30,
-                marginLeft: 20,
-                marginBottom: 10,
-                fontFamily: 'montserrat-regular',
-                fontWeight: '300',
-                fontSize: 12,
-              }}
-            >
-              DOCUMENTATION
-            </Text>
-          </Block>
-          <DrawerCustomItem title="GETTING STARTED" navigation={navigation} />
-          <DrawerCustomItem title="LOGOUT" navigation={navigation} />
+
+
+
         </ScrollView>
       </Block>
     </Block>

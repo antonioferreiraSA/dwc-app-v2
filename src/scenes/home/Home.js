@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext, useLayoutEffect } from 'react'
-import { Text, View, ScrollView, StyleSheet, Image, Dimensions, Modal, Pressable } from 'react-native'
+import { Text, View, ScrollView, StyleSheet, Image, Dimensions, Modal, Pressable , TouchableOpacity} from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import ScreenTemplate from '../../components/ScreenTemplate'
 import Button from '../../components/Button'
@@ -14,6 +14,9 @@ import { Avatar } from '@rneui/themed';
 import video from '../../../assets/loader.mp4'
 import axios from 'axios';
 import { Video, ResizeMode } from 'expo-av';
+import { Ionicons, Feather, Fontisto, AntDesign } from '@expo/vector-icons';
+
+import Colors from '../../../constants/Colors'
 
 export default function Home() {
 
@@ -81,6 +84,19 @@ const SCREEN_WIDTH = Dimensions.get('window').width;
     })
     console.log(res)
   }
+  const CheckInButton = () => (
+    <Button
+
+      title="Check In"
+      style={styles.checkIn}
+      onPress={() =>
+        openBrowser({
+          title: 'Check In',
+          url: 'http://echo.church/checkin',
+        })
+      }
+    />
+  );
 
 
 
@@ -98,14 +114,21 @@ const SCREEN_WIDTH = Dimensions.get('window').width;
     </View>
     </View>
     <View style={styles.liveContainer} onPress={() => setModalVisible(true)}>
-    <View style={styles.live} >
+    <TouchableOpacity
+    style={styles.live}
+    onPress={() => {
+      navigation.navigate('ModalStacks', {
+        screen: 'Announcments'
+      })
+    }}
+     >
     <Image
   source={require('../../../assets/images/banner.png')}
   style={{ width: 200, height: 200 }}
   resizeMode="contain"
   onPress={() => setModalVisible(true)}
 />
-</View>
+</TouchableOpacity>
 
 
 
@@ -166,47 +189,36 @@ const SCREEN_WIDTH = Dimensions.get('window').width;
       </View>
     </View>
   </View>
+  <Button
+      icon={<AntDesign name="team" size={28} color={Colors.white} />}
+      label='Join The Family'
+      color={colors.tertiary}
+
+    />
+  <View style={styles.container1}>
+  <View style={{paddingHorizontal:10}}>
+  <TouchableOpacity style={styles.button}>
+    <Ionicons name="logo-instagram" size={20} color="#fff" />
+  </TouchableOpacity>
+  </View>
+  <View style={{paddingHorizontal:10}}>
+  <TouchableOpacity style={styles.button}>
+    <Ionicons name="logo-facebook" size={20} color="#fff" />
+  </TouchableOpacity>
+  </View>
+  <View style={{paddingHorizontal:10}}>
+  <TouchableOpacity style={styles.button}>
+    <Ionicons name="logo-youtube" size={20} color="#fff" />
+  </TouchableOpacity>
+  </View>
+</View>
 
 
 
-
-
-        <View style={colorScheme.content}>
-          <Text style={[styles.field, { color: colorScheme.text }]}>Mail:</Text>
-          <Text style={[styles.title, { color: colorScheme.text }]}>{userData.email}</Text>
-          {token ?
-            <>
-              <Text style={[styles.field, { color: colorScheme.text }]}>Expo push token:</Text>
-              <Text style={[styles.title, { color: colorScheme.text }]}>{token.token}</Text>
-            </> : null
-          }
-        </View>
-
-        <Button
-          label='Go to Detail'
-          color={colors.primary}
-          onPress={() => navigation.navigate('Detail', { userData: userData, from: 'Home', title: userData.email })}
-        />
-        <Button
-          label='Open Modal'
-          color={colors.tertiary}
-          onPress={() => {
-            navigation.navigate('ModalStacks', {
-              screen: 'Post',
-              params: {
-                data: userData,
-                from: 'Home screen'
-              }
-            })
-          }}
-        />
-        <Button
-          label='Send Notification'
-          color={colors.pink}
-          onPress={() => onNotificationPress()}
-          disable={!token}
-        />
       </ScrollView>
+
+
+
     </ScreenTemplate>
 
   )
@@ -316,5 +328,27 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+
+  // buttons
+  container1: {
+    paddingTop: 20,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: 15,
+
+
+
+  },
+  button: {
+    width: 40,
+    height: 40,
+    borderRadius: 25,
+    backgroundColor: '#3f3f3f',
+    alignItems: 'center',
+    justifyContent: 'center',
+
+  },
+
 
 })

@@ -8,10 +8,11 @@ import Colors from '../constants/Colors';
  * The main Connect items
  */
 export const listItems = [
-  { value: 'LOCATION & CONTACT', page: 'Location' },
-  { value: 'BAPTISM', page: 'Baptism' },
-  { value: 'VOLUNTEER', page: 'Volunteer' },
-  { value: 'PRAYER REQUESTS', page: 'PrayerRequest' },
+  { value: 'Location & Contact', page: 'Location' },
+  { value: 'Dr Adrian  Legacy', page: 'AdrianScreen' },
+  { value: 'Prayer Request', page: 'PrayerRequest' },
+  { value: 'Baptism', page: 'Baptism' },
+  { value: 'Volunteer', page: 'Volunteer' },
 ];
 
 /**

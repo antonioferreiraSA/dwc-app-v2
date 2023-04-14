@@ -13,6 +13,7 @@ import PrayerRequest from '../../../scenes/PrayerRequest/PrayerRequests'
 import Location from '../../../scenes/Location'
 import { FollowFollowerNavigator } from '../toptabs/followfollowerNavigator'
 import Connect from '../../../scenes/connect'
+import AdrianScreen from '../../../scenes/Adrian/Adrian'
 const Stack = createStackNavigator()
 const RootStack = createStackNavigator()
 
@@ -65,6 +66,14 @@ export const ConnectNavigator = () => {
 
     headerBackground: scheme === 'dark' ? null: () => <HeaderStyle />,
   })}
+/>
+<Stack.Screen
+name="AdrianScreen"
+component={AdrianScreen}
+options={({ navigation }) => ({
+
+  headerBackground: scheme === 'dark' ? null: () => <HeaderStyle />,
+})}
 />
       </RootStack.Group>
     </Stack.Navigator>

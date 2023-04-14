@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { SafeAreaView } from 'react-native';
 import WebView from 'react-native-webview';
 
-const Events = () => {
-  const [uri, setUri] = useState('https://mobile.destinyworshipcentre.co.za/events-2/');
+const Announcments = () => {
+  const [uri, setUri] = useState('https://mobile.destinyworshipcentre.co.za/announcements/');
 
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -20,4 +20,4 @@ const Events = () => {
   );
 };
 
-export default Events;
+export default Announcments;

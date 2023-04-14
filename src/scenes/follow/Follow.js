@@ -1,10 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, ScrollView, Image, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, ScrollView, Image, TouchableOpacity } from 'react-native';
+import Layout from '../../../constants/Layout'
+import Colors from '../../../constants/Colors'
+import { Text, Subtitle } from '../../components/shared/Typography'
+import { useSafeArea } from 'react-native-safe-area-context'
 
-const YOUTUBE_API_KEY = 'AIzaSyDYmZpJk2TlDycX5vGZcIbMeh3cDLKWggM';
+import { FontAwesome } from '@expo/vector-icons';
+const YOUTUBE_API_KEY = 'AIzaSyDRlcySTdfFHGO1RuIdvkFEU40Tuc1TALo';
 const CHANNEL_ID = 'UCJ3J0grUampl4mkzqoBWmAA';
 
-const LatestVideosScreen = () => {
+const LatestVideosScreen = ({ navigation }) => {
   const [videos, setVideos] = useState([]);
 
   useEffect(() => {
@@ -15,21 +20,31 @@ const LatestVideosScreen = () => {
           id: item.id.videoId,
           title: item.snippet.title,
           thumbnail: item.snippet.thumbnails.medium.url,
+          description: item.snippet.description,
         }));
         setVideos(videosData);
       });
   }, []);
 
+  const handleVideoPress = (videoId, videoTitle) => {
+    navigation.navigate('VideoPlayerScreen', { videoId, videoTitle });
+  };
+
+  const insets = useSafeArea();
+
   return (
-    <View style={styles.container}>
-      <Text style={styles.heading}>Latest Videos</Text>
+    <View style={[styles.mainContainer]}>
+      <Text XXL bold style={styles.headerTitle}>Latest Videos</Text>
       <ScrollView contentContainerStyle={styles.scrollViewContainer}>
-        {videos.map(video => (
-          <TouchableOpacity key={video.id} style={styles.videoBlock}>
-            <Text style={styles.videoTitle}>{video.title}</Text>
-            <Image source={{ uri: video.thumbnail }} style={styles.videoThumbnail} />
-          </TouchableOpacity>
-        ))}
+      {videos && videos.map(video => (
+        <TouchableOpacity key={video.id} style={styles.videoBlock} onPress={() => handleVideoPress(video.id, video.title)}>
+          <Subtitle style={styles.title2} >{video.title}</Subtitle>
+
+
+          <Image source={{ uri: video.thumbnail }} style={styles.videoThumbnail} />
+          <FontAwesome name="play-circle-o" size={100} color="white"  style={styles.playIcon} />
+        </TouchableOpacity>
+      ))}
       </ScrollView>
     </View>
   );
@@ -40,10 +55,26 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 20,
   },
+  mainContainer: {
+    flex: 1,
+    paddingTop: 15,
+    paddingHorizontal: 15,
+  },
+  playIcon: {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    marginLeft: -35,
+    marginTop: -30,
+  },
   heading: {
     fontSize: 24,
     fontWeight: 'bold',
     marginBottom: 20,
+  },
+  headerTitle: {
+    marginVertical: 10,
+    color: Colors.red,
   },
   scrollViewContainer: {
     paddingBottom: 20,
@@ -59,7 +90,8 @@ const styles = StyleSheet.create({
   videoThumbnail: {
     width: '100%',
     aspectRatio: 16 / 9,
+    borderRadius: 20,
   },
 });
 
-export default LatestVideosScreen
+export default LatestVideosScreen;

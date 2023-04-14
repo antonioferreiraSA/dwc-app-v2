@@ -44,7 +44,7 @@ const BaptismScreen = () => {
             <Button
               title="I'm Interested"
               style={styles.button}
-              onPress={() => {
+             onPress={() => {
                 logEvent('TAP Prayer Request Submit');
                 WebBrowser.openBrowserAsync(
                   'https://mobile.destinyworshipcentre.co.za/baptism-form/',

@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, ScrollView, Image, TouchableOpacity } from 'react-native';
-
-const YOUTUBE_API_KEY = 'AIzaSyDYmZpJk2TlDycX5vGZcIbMeh3cDLKWggM';
+import { StyleSheet,  View, ScrollView, Image, TouchableOpacity } from 'react-native';
+import { Video } from 'expo-av';
+import Colors from '../../../constants/Colors'
+import { Text, Subtitle } from '../../components/shared/Typography'
+import { FontAwesome } from '@expo/vector-icons';
+const YOUTUBE_API_KEY = 'AIzaSyDRlcySTdfFHGO1RuIdvkFEU40Tuc1TALo';
 const CHANNEL_ID = 'UCJ3J0grUampl4mkzqoBWmAA';
 
-const VideosScreen = () => {
+const VideosScreen = ({ navigation }) => {
   const [videos, setVideos] = useState([]);
 
   useEffect(() => {
@@ -27,14 +30,19 @@ const VideosScreen = () => {
       });
   }, []);
 
+  const handleVideoPress = (videoId, videoTitle) => {
+    navigation.navigate('VideoPlayerScreen', { videoId, videoTitle });
+  };
+
   return (
     <View style={styles.container}>
-      <Text style={styles.heading}>All Videos (excluding recent 10)</Text>
+    <Text XXL bold style={styles.headerTitle}>Previous Videos</Text>
       <ScrollView contentContainerStyle={styles.scrollViewContainer}>
         {videos.map(video => (
-          <TouchableOpacity key={video.id} style={styles.videoBlock}>
-            <Text style={styles.videoTitle}>{video.title}</Text>
+          <TouchableOpacity key={video.id} style={styles.videoBlock} onPress={() => handleVideoPress(video.id, video.title)}>
+          <Subtitle style={styles.title2} >{video.title}</Subtitle>
             <Image source={{ uri: video.thumbnail }} style={styles.videoThumbnail} />
+            <FontAwesome name="play-circle-o" size={100} color="white"  style={styles.playIcon} />
           </TouchableOpacity>
         ))}
       </ScrollView>
@@ -63,9 +71,20 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginBottom: 10,
   },
+  playIcon: {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    marginLeft: -35,
+    marginTop: -25,
+  },
+  title2: {
+    paddingVertical: 15,
+  },
   videoThumbnail: {
     width: '100%',
     aspectRatio: 16 / 9,
+    borderRadius: 20,
   },
 });
 

@@ -1,12 +1,11 @@
 import React from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import FontIcon from 'react-native-vector-icons/FontAwesome5'
-import { FontAwesome5 } from '@expo/vector-icons'
+import { FontAwesome5, MaterialIcons, Entypo } from '@expo/vector-icons'
 import { colors } from 'theme'
 import ConnectLogo from '../../../../assets/icons/ConnectLogo'
 import EventsLogo from '../../../../assets/icons/GroupsLogo'
 import More from '../../../scenes/More/More'
-import { Entypo } from '@expo/vector-icons';
 
 // New Screens from echo.church
 import Give from '../../../scenes/Give'
@@ -78,7 +77,8 @@ const TabNavigator = () => {
         options={{
           tabBarLabel: 'Sermon',
           tabBarIcon: ({ color, size }) => (
-            <EventsLogo
+            <MaterialIcons
+            name='live-tv'
               color={color}
               size={size}
             />

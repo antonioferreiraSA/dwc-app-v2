@@ -4,6 +4,7 @@ import { HomeTitleContext } from "../../../../context/HomeTitleContext";
 
 import Post from "../../../../scenes/post";
 import Print from "../../../../scenes/print";
+import Announcments from "../../../../scenes/Announcments/Announcments";
 
 const Stack = createStackNavigator()
 
@@ -36,6 +37,10 @@ export const ModalStacks = () => {
               name='Print'
               component={Print}
             />
+            <Stack.Screen
+            name='Announcments'
+            component={Announcments}
+          />
           </Stack.Navigator>
       )}
       </HomeTitleContext.Consumer>

@@ -14,7 +14,7 @@ export default function Button(props) {
       </View>
     )
   }
-  
+
   return (
     <TouchableOpacity
       style={[styles.button, { backgroundColor: color }]}
@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
     marginRight: 30,
     marginTop: 20,
     height: 48,
-    borderRadius: 5,
+    borderRadius: 15,
     alignItems: "center",
     justifyContent: 'center'
   },
