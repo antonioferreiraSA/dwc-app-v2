@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {
   Image,
   Linking,
@@ -24,7 +24,8 @@ import { openBrowser } from '../../../utils/openBrowser'
 // eslint-disable-next-line no-duplicate-imports
 import { FontAwesome5 } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
-
+import { colors, fontSize } from '../../theme'
+import { ColorSchemeContext } from '../../context/ColorSchemeContext'
 const openMaps = (location) => {
   let url = '';
 
@@ -48,11 +49,20 @@ const openMaps = (location) => {
 const Location = () => {
   const navigation = useNavigation();
   const insets = useSafeArea();
+  const { scheme, toggleScheme  } = useContext(ColorSchemeContext)
+  const isDark = scheme === 'dark'
+  const colorScheme = {
+    content: isDark? styles.darkContent : styles.lightContent,
+    text: isDark? colors.white : colors.primaryText,
+    container: isDark? colors.darkContainer : colors.lightContainer,
+    container2: isDark? colors.darkContainer2 : colors.lightContainer,
+
+  }
 
 
   return (
-    <View   >
-        <ScrollView >
+    <View style={{backgroundColor: colorScheme.container}}>
+        <ScrollView style={{backgroundColor: colorScheme.container}}>
         <TouchableHighlight
 
                 onPress={() => openMaps('NSJ')}
@@ -135,7 +145,6 @@ const styles = StyleSheet.create({
   container: {
     paddingVertical: 20,
     paddingHorizontal: 16,
-    backgroundColor: Colors.black,
   },
   button: { marginBottom: 20 },
   heading: { marginVertical: 10 },

@@ -14,6 +14,7 @@ import { ColorSchemeContext } from '../../context/ColorSchemeContext'
 import { LogBox } from 'react-native';
 import { signInWithEmailAndPassword } from 'firebase/auth'
 import { auth } from '../../firebase/config'
+import { Ionicons, Feather, Fontisto, AntDesign, Entypo, FontAwesome5 } from '@expo/vector-icons';
 
 // To ignore a useless warning in terminal.
 // https://stackoverflow.com/questions/44603362/setting-a-timer-for-a-long-period-of-time-i-e-multiple-minutes
@@ -24,7 +25,9 @@ export default function Login() {
   const [password, setPassword] = useState('')
   const [spinner, setSpinner] = useState(false)
   const navigation = useNavigation()
-  const { scheme } = useContext(ColorSchemeContext)
+  const { scheme, toggleScheme  } = useContext(ColorSchemeContext)
+    const icon = scheme === 'light' ? 'moon' : 'sun';
+    const textmode = scheme === 'light' ? 'Change to dark mode' : 'Change to light mode';
   const isDark = scheme === 'dark'
   const colorScheme = {
     text: isDark? colors.white : colors.primaryText
@@ -85,7 +88,7 @@ export default function Login() {
         />
         <Button
           label='Log in'
-          color={colors.primary}
+          color={colors.primaryButton}
           onPress={() => onLoginPress()}
         />
         <View style={styles.footerView}>
@@ -115,7 +118,16 @@ export default function Login() {
                 Privacy Policy
               </Text>
             </TouchableOpacity>
+
+
           </View>
+          <View style={styles.ModeStyle}>
+          <TouchableOpacity onPress={toggleScheme} style={styles.ModeStyle2}>
+            <FontAwesome5 name={icon} size={24} color="white" />
+          </TouchableOpacity>
+          <View style={{ paddingVertical: 5}}/>
+          <Text style={[styles.footerText, { color: colorScheme.text }]}>{textmode}</Text>
+        </View>
       </KeyboardAwareScrollView>
       <Spinner
         visible={spinner}
@@ -130,6 +142,24 @@ const styles = StyleSheet.create({
   main: {
     flex: 1,
     width: '100%',
+  },
+  ModeStyle: {
+    borderRadius: 50,
+    padding: 10,
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingVertical: 20,
+
+  },
+  ModeStyle2: {
+    borderRadius: 50,
+    padding: 10,
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#368CC1'
+
   },
   logo: {
     height: 200,
@@ -156,6 +186,9 @@ const styles = StyleSheet.create({
     marginTop: 20
   },
   footerText: {
+    fontSize: fontSize.large,
+  },
+  footerText1: {
     fontSize: fontSize.large,
   },
   footerLink: {

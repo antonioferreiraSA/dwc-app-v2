@@ -12,10 +12,23 @@ const colors = {
   secondary: '#dc143c',
   tertiary: '#228b22',
   white: '#ffffff',
-  darkInput: '#303030',
+  darkInput: '#232F41',
   primaryText: '#2e2e2d',
   lightyellow: '#ffffe0',
   black: '#000000',
+
+  // contanirs
+  darkContainer2: '#232F41',
+  darkContainer: '#162337',
+  lightContainer: '#F5F7F8',
+
+  // button
+  primaryButton: '#25AC68'
+
+
+
+
+
 }
 
 export default colors

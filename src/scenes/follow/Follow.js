@@ -1,15 +1,24 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { StyleSheet, View, ScrollView, Image, TouchableOpacity } from 'react-native';
+import { ColorSchemeContext } from '../../context/ColorSchemeContext'
 import Layout from '../../../constants/Layout'
 import Colors from '../../../constants/Colors'
 import { Text, Subtitle } from '../../components/shared/Typography'
 import { useSafeArea } from 'react-native-safe-area-context'
-
+import { colors, fontSize } from '../../theme'
 import { FontAwesome } from '@expo/vector-icons';
+
+
 const YOUTUBE_API_KEY = 'AIzaSyDRlcySTdfFHGO1RuIdvkFEU40Tuc1TALo';
 const CHANNEL_ID = 'UCJ3J0grUampl4mkzqoBWmAA';
 
+
 const LatestVideosScreen = ({ navigation }) => {
+  const { scheme, toggleScheme  } = useContext(ColorSchemeContext)
+const isDark = scheme === 'dark'
+const colorScheme = {
+  container: isDark? colors.darkContainer : colors.lightContainer,
+}
   const [videos, setVideos] = useState([]);
 
   useEffect(() => {
@@ -33,11 +42,11 @@ const LatestVideosScreen = ({ navigation }) => {
   const insets = useSafeArea();
 
   return (
-    <View style={[styles.mainContainer]}>
+    <View style={[styles.mainContainer, {backgroundColor: colorScheme.container}]}>
       <Text XXL bold style={styles.headerTitle}>Latest Videos</Text>
       <ScrollView contentContainerStyle={styles.scrollViewContainer}>
       {videos && videos.map(video => (
-        <TouchableOpacity key={video.id} style={styles.videoBlock} onPress={() => handleVideoPress(video.id, video.title)}>
+        <TouchableOpacity key={video.id} style={[styles.videoBlock,]} onPress={() => handleVideoPress(video.id, video.title)}>
           <Subtitle style={styles.title2} >{video.title}</Subtitle>
 
 
@@ -81,6 +90,7 @@ const styles = StyleSheet.create({
   },
   videoBlock: {
     marginBottom: 20,
+
   },
   videoTitle: {
     fontSize: 18,
@@ -90,7 +100,7 @@ const styles = StyleSheet.create({
   videoThumbnail: {
     width: '100%',
     aspectRatio: 16 / 9,
-    borderRadius: 20,
+    borderRadius: 10,
   },
 });
 

@@ -60,6 +60,7 @@ export default function RootStack() {
     <Stack.Navigator
       screenOptions={{
         headerShown: false
+
       }}
     >
       <Stack.Screen

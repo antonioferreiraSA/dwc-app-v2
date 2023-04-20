@@ -18,6 +18,7 @@ import { updatePassword, EmailAuthProvider, reauthenticateWithCredential } from 
 import { auth } from '../../firebase/config'
 import { showToast } from '../../utils/ShowToast'
 import Spinner from 'react-native-loading-spinner-overlay'
+import { TouchableOpacity } from 'react-native';
 
 export default function Edit() {
   const { userData } = useContext(UserDataContext)
@@ -145,6 +146,9 @@ export default function Edit() {
             onPress={ImageChoiceAndUpload}
             source={{ uri: avatar }}
           />
+          <TouchableOpacity onPress={ImageChoiceAndUpload}>
+          <Text>Update Profile Pic</Text>
+          </TouchableOpacity>
         </View>
         <Text style={colorScheme.progress}>{progress}</Text>
         <Text style={[styles.field, {color: colorScheme.text}]}>Name:</Text>

@@ -1,13 +1,20 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { StyleSheet,  View, ScrollView, Image, TouchableOpacity } from 'react-native';
 import { Video } from 'expo-av';
 import Colors from '../../../constants/Colors'
 import { Text, Subtitle } from '../../components/shared/Typography'
 import { FontAwesome } from '@expo/vector-icons';
+import { colors, fontSize } from '../../theme'
+import { ColorSchemeContext } from '../../context/ColorSchemeContext'
 const YOUTUBE_API_KEY = 'AIzaSyDRlcySTdfFHGO1RuIdvkFEU40Tuc1TALo';
 const CHANNEL_ID = 'UCJ3J0grUampl4mkzqoBWmAA';
 
 const VideosScreen = ({ navigation }) => {
+  const { scheme, toggleScheme  } = useContext(ColorSchemeContext)
+  const isDark = scheme === 'dark'
+const colorScheme = {
+  container: isDark? colors.darkContainer : colors.lightContainer,
+}
   const [videos, setVideos] = useState([]);
 
   useEffect(() => {
@@ -35,7 +42,7 @@ const VideosScreen = ({ navigation }) => {
   };
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.mainContainer, {backgroundColor: colorScheme.container}]}>
     <Text XXL bold style={styles.headerTitle}>Previous Videos</Text>
       <ScrollView contentContainerStyle={styles.scrollViewContainer}>
         {videos.map(video => (
@@ -84,7 +91,7 @@ const styles = StyleSheet.create({
   videoThumbnail: {
     width: '100%',
     aspectRatio: 16 / 9,
-    borderRadius: 20,
+    borderRadius: 10,
   },
 });
 

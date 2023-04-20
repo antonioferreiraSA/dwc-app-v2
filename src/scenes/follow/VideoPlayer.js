@@ -1,9 +1,17 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import { StyleSheet, Text, View, Dimensions, TouchableOpacity } from 'react-native';
 import { WebView } from 'react-native-webview';
 import { AntDesign } from '@expo/vector-icons';
+import { ColorSchemeContext } from '../../context/ColorSchemeContext'
+import { colors, fontSize } from '../../theme'
 
 const VideoPlayerScreen = ({ route, navigation }) => {
+  const { scheme, toggleScheme  } = useContext(ColorSchemeContext)
+  const isDark = scheme === 'dark'
+const colorScheme = {
+  container: isDark? colors.darkContainer : colors.lightContainer,
+}
+
   const { videoId, videoTitle,  } = route.params;
   const screenWidth = Dimensions.get('screen').width;
   const screenHeight = Dimensions.get('screen').height;
@@ -14,9 +22,9 @@ const VideoPlayerScreen = ({ route, navigation }) => {
   };
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, {backgroundColor: colorScheme.container}]}>
 
-      <View style={[styles.videoContainer, { width: videoWidth, height: videoHeight }]}>
+      <View style={[styles.videoContainer, { width: videoWidth, height: videoHeight, backgroundColor: colorScheme.container }]}>
         <WebView
           allowsFullscreenVideo={true}
           source={{ uri: `https://www.youtube.com/embed/${videoId}` }}
@@ -42,11 +50,9 @@ const styles = StyleSheet.create({
   },
   videoContainer: {
     alignSelf: 'center',
-    backgroundColor: 'black',
   },
   titleContainer: {
     padding: 10,
-    backgroundColor: 'white',
   },
   videoTitle: {
     fontSize: 20,

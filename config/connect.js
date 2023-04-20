@@ -10,6 +10,7 @@ import Colors from '../constants/Colors';
 export const listItems = [
   { value: 'Location & Contact', page: 'Location' },
   { value: 'Dr Adrian  Legacy', page: 'AdrianScreen' },
+  { value: 'Sunday School  ', page: 'SundaySchool' },
   { value: 'Prayer Request', page: 'PrayerRequest' },
   { value: 'Baptism', page: 'Baptism' },
   { value: 'Volunteer', page: 'Volunteer' },

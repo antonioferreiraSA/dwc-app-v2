@@ -10,7 +10,12 @@ import Home from '../../../scenes/home'
 import Detail from '../../../scenes/detail'
 import Profile from '../../../scenes/profile'
 import Edit from '../../../scenes/edit'
-
+import { EventsNavigator } from './EventsNavigator'
+import { SermonNavigator } from './SermonNavigator'
+import AdrianScreen from '../../../scenes/Adrian/Adrian'
+import Give from '../../../scenes/Give'
+import BaptismScreen from '../../../scenes/Baptism/Baptism'
+import Volunteer from '../../../scenes/Volunteer/Volunteer'
 const Stack = createStackNavigator()
 const Drawer = createDrawerNavigator()
 
@@ -20,12 +25,7 @@ const HomeStack = () => {
   const [title, setTitle] = useState('default title')
 
   return (
-    <HomeTitleContext.Provider
-      value={{
-        title,
-        setTitle,
-      }}
-    >
+
       <HomeTitleContext.Consumer>
         {(ctx) => (
           <Stack.Navigator screenOptions={navigationProps}>
@@ -33,7 +33,7 @@ const HomeStack = () => {
               name="Home"
               component={Home}
               options={({ navigation }) => ({
-                headerShown: false,
+
                 headerBackground: scheme === 'dark' ? null: () => <HeaderStyle />,
               })}
             />
@@ -61,35 +61,64 @@ const HomeStack = () => {
                 headerBackground: scheme === 'dark' ? null: () => <HeaderStyle />,
               }}
             />
+            <Stack.Screen
+            name="Events"
+            component={EventsNavigator}
+            options={{
+              headerShown: false,
+              title: ctx.title,
+              headerBackground: scheme === 'dark' ? null: () => <HeaderStyle />,
+            }}
+          />
+          <Stack.Screen
+            name="Sermons"
+            component={SermonNavigator}
+            options={{
+              headerShown: false,
+              title: ctx.title,
+              headerBackground: scheme === 'dark' ? null: () => <HeaderStyle />,
+            }}
+          />
+          <Stack.Screen
+          name="Giving"
+          component={Give}
+          options={{
+            headerShown: false,
+            headerBackground: scheme === 'dark' ? null: () => <HeaderStyle />,
+          }}
+        />
+        <Stack.Screen
+        name="Adrian"
+        component={AdrianScreen}
+        options={{
+          headerBackground: scheme === 'dark' ? null: () => <HeaderStyle />,
+        }}
+      />
+      <Stack.Screen
+        name="Baptism"
+        component={BaptismScreen}
+        options={{
+          headerBackground: scheme === 'dark' ? null: () => <HeaderStyle />,
+        }}
+      />
+      <Stack.Screen
+      name="Volunteer"
+      component={Volunteer}
+      options={{
+        headerBackground: scheme === 'dark' ? null: () => <HeaderStyle />,
+      }}
+    />
           </Stack.Navigator>
         )}
       </HomeTitleContext.Consumer>
-    </HomeTitleContext.Provider>
+
   )
 }
 
-const DrawerNavigator = () => {
-  const navigationProps = scheme === 'dark' ? darkProps:lightProps
-  const { scheme } = useContext(ColorSchemeContext)
-  return (
-    <Drawer.Navigator
-    style={{ flex: 1 }}
-      drawerContent={(props) => <CustomDrawerContent {...props} />}
-    >
-      <Drawer.Screen
-      name="Home"
-      component={HomeStack}
-      options={({ navigation }) => ({
-        headerBackground: scheme === 'dark' ? null: () => <HeaderStyle />,
-      })}
-      />
-      <Drawer.Screen name="Profile" component={Profile} />
-    </Drawer.Navigator>
-  )
-}
+
 
 export const HomeNavigator = () => {
   return (
-    <DrawerNavigator />
+    <HomeStack />
   )
 }

@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react'
-import { Text, StyleSheet, View, Linking } from 'react-native'
+import { Text, StyleSheet, View, Linking, TouchableOpacity } from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import ScreenTemplate from '../../components/ScreenTemplate';
 import TextInputBox from '../../components/TextInputBox';
@@ -15,6 +15,7 @@ import { defaultAvatar, eulaLink } from '../../config'
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../../firebase/config'
 import { showToast } from '../../utils/ShowToast'
+import { Ionicons, Feather, Fontisto, AntDesign, Entypo, FontAwesome5 } from '@expo/vector-icons';
 
 export default function Registration() {
   const [fullName, setFullName] = useState('')
@@ -23,12 +24,15 @@ export default function Registration() {
   const [confirmPassword, setConfirmPassword] = useState('')
   const [spinner, setSpinner] = useState(false)
   const navigation = useNavigation()
-  const { scheme } = useContext(ColorSchemeContext)
   const isDark = scheme === 'dark'
   const colorScheme = {
-    text: isDark? colors.white : colors.primaryText
+    text: isDark? colors.white : colors.primaryText,
+    textFooter: isDark? colors.white : colors.primaryText
   }
 
+  const { scheme, toggleScheme  } = useContext(ColorSchemeContext)
+  const icon = scheme === 'light' ? 'moon' : 'sun';
+  const textmode = scheme === 'light' ? 'Change to dark mode' : 'Change to light mode';
   useEffect(() => {
     console.log('Registration screen')
   }, [])
@@ -77,7 +81,7 @@ export default function Registration() {
       >
         <Logo />
         <TextInputBox
-          placeholder='Your Name'
+          placeholder='Your Name & Surname'
           onChangeText={(text) => setFullName(text)}
           value={fullName}
           autoCapitalize="none"
@@ -103,7 +107,7 @@ export default function Registration() {
           value={confirmPassword}
           autoCapitalize="none"
         />
-        <Text style={[styles.link, {color: colorScheme.text}]} onPress={() =>
+        <Text style={[styles.link, {color: colorScheme.textFooter}]} onPress={() =>
           Linking.openURL(
             'https://mobile.destinyworshipcentre.co.za/wp-content/uploads/2023/03/Privacy-Policy-Destiny-Worship-Centre-Church-1.pdf',
           )
@@ -111,7 +115,7 @@ export default function Registration() {
         to the{' '}<Text style={styles.eulaLink}>DWC Terms and conditions</Text></Text>
         <Button
           label='Agree and Create account'
-          color={colors.primary}
+          color={colors.primaryButton}
           onPress={() => {
             onRegisterPress()
 
@@ -120,6 +124,7 @@ export default function Registration() {
         <View style={styles.footerView}>
           <Text style={[styles.footerText, {color: colorScheme.text}]}>Already got an account? <Text onPress={onFooterLinkPress} style={styles.footerLink}>Log in</Text></Text>
         </View>
+
 
       </KeyboardAwareScrollView>
       <Spinner
@@ -141,6 +146,23 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginBottom: 20,
     marginTop: 20
+  },
+  ModeStyle: {
+    borderRadius: 50,
+    padding: 10,
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+
+  },
+  ModeStyle2: {
+    borderRadius: 50,
+    padding: 10,
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#368CC1'
+
   },
   footerText: {
     fontSize: fontSize.large,

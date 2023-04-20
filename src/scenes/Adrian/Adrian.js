@@ -8,7 +8,7 @@ import Colors from '../../../constants/Colors';
 import { Text, Title, Heading } from '../../components/shared/Typography'
 import Button from '../../components/shared/Button';
 import { useNavigation } from '@react-navigation/native';
-
+import { FontAwesome } from '@expo/vector-icons';
 
 
 const YOUTUBE_API_KEY = 'AIzaSyDYmZpJk2TlDycX5vGZcIbMeh3cDLKWggM';
@@ -16,8 +16,10 @@ const PLAYLIST_ID = 'PLceXGIxnj2XcS5yLQF4Wg-pMAcX2Xkpgc';
 
 
 
-
 const AdrianScreen = () => {
+  const handleVideoPress = (videoId, videoTitle) => {
+    navigation.navigate('VideoPlayerScreen', { videoId, videoTitle });
+  };
   const [videos, setVideos] = useState([]);
 
   const fetchVideos = async () => {
@@ -36,8 +38,11 @@ const AdrianScreen = () => {
   }, []);
 
   const renderItem = ({ item }) => (
-    <TouchableOpacity key={item.id} style={styles.videoBlock}>
+    <TouchableOpacity key={item.id} style={styles.videoBlock}  onPress={() => handleVideoPress(item.id, item.title)}>
       <Image source={{ uri: item.thumbnail }} style={styles.videoThumbnail} />
+      <View style={styles.playIconWrapper}>
+      <FontAwesome name="play-circle-o" size={60} color="white" style={styles.playIcon} />
+    </View>
       <Text style={styles.videoTitle}>{item.title}</Text>
     </TouchableOpacity>
   );
@@ -83,7 +88,7 @@ const AdrianScreen = () => {
               `}
             </Text>
             <Heading>
-            Please see below for books and inspirational content from Dr. Adrian Naidoo.
+            Please see below for  inspirational content from Dr. Adrian Naidoo.
             </Heading>
 
             <View style={styles.container1}>
@@ -107,6 +112,14 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: Colors.darkestGray,
   },
+  playIconWrapper: {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: [{ translateX: -50 }, { translateY: -50 }],
+    zIndex: 1,
+  },
+
   image: {
     width: '100%',
     height: 250,
@@ -139,6 +152,13 @@ const styles = StyleSheet.create({
     flex: 1,
     margin: 10,
   },
+  playIcon: {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    marginLeft: 22,
+    marginTop: -5,
+  },
   videoTitle: {
     fontSize: 16,
     fontWeight: 'bold',
@@ -146,7 +166,8 @@ const styles = StyleSheet.create({
   },
   videoThumbnail: {
     width: '100%',
-    aspectRatio: 16 / 9,
+    aspectRatio: 16 / 11,
+    borderRadius: 10
   },
 
 

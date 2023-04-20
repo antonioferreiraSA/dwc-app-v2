@@ -4,12 +4,12 @@ import LottieView from "lottie-react-native"
 
 export default function LoadingScreen() {
   const animation = useRef(null);
-  
+
   return (
     <View style={styles.container}>
       <LottieView
         ref={animation}
-        source={require("../../assets/lottie/98288-loading.json")}
+        source={require("../../assets/lottie/error-loading.json")}
         style={styles.animation}
         autoPlay
       />

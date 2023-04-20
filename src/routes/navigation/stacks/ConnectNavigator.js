@@ -10,8 +10,10 @@ import HeaderRightButton from '../../../components/HeaderRightButton'
 import BaptismScreen from '../../../scenes/Baptism/Baptism'
 import Volunteer from '../../../scenes/Volunteer/Volunteer'
 import PrayerRequest from '../../../scenes/PrayerRequest/PrayerRequests'
+import SundaySchool from '../../../scenes/SundaySchool/SundaySchool'
 import Location from '../../../scenes/Location'
 import { FollowFollowerNavigator } from '../toptabs/followfollowerNavigator'
+import More from '../../../scenes/More'
 import Connect from '../../../scenes/connect'
 import AdrianScreen from '../../../scenes/Adrian/Adrian'
 const Stack = createStackNavigator()
@@ -30,6 +32,7 @@ export const ConnectNavigator = () => {
           component={Connect}
           options={({ navigation }) => ({
             headerShown:false,
+            headerTitle: null,
 
             headerBackground: scheme === 'dark' ? null: () => <HeaderStyle />,
             headerRight: () => <HeaderRightButton from='Connect' userData={userData} />
@@ -47,7 +50,6 @@ export const ConnectNavigator = () => {
       name="Location"
       component={Location}
       options={({ navigation }) => ({
-
         headerBackground: scheme === 'dark' ? null: () => <HeaderStyle />,
       })}
     />
@@ -75,6 +77,23 @@ options={({ navigation }) => ({
   headerBackground: scheme === 'dark' ? null: () => <HeaderStyle />,
 })}
 />
+<Stack.Screen
+name="SundaySchool"
+component={SundaySchool}
+options={({ navigation }) => ({
+
+  headerBackground: scheme === 'dark' ? null: () => <HeaderStyle />,
+})}
+/>
+<Stack.Screen
+name="More"
+component={More}
+options={({ navigation }) => ({
+
+  headerBackground: scheme === 'dark' ? null: () => <HeaderStyle />,
+})}
+/>
+
       </RootStack.Group>
     </Stack.Navigator>
   )

@@ -34,6 +34,6 @@ const styles = StyleSheet.create({
   },
   darkContainer: {
     flex: 1,
-    backgroundColor: colors.black
+    backgroundColor: colors.darkContainer,
   }
 })

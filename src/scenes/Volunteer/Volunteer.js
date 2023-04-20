@@ -29,7 +29,7 @@ const Volunteer = () => {
 
             <Subtitle>Why Volunteers Matter</Subtitle>
             <Text style={styles.content}>
-              {`Volunteering is a great opportunity to use your time, energy, and skills to make a real difference in someone's life. Whether you are enthusiastically greeting our guests, holding babies in the nursery, or playing the drums on stage, every volunteer has a part in the life transformation that happens each week at Echo.Church. Join a team and experience the joy of knowing that God used your life to make an eternal impact.`}
+              {`Volunteering is a great opportunity to use your time, energy, and skills to make a real difference in someone's life. Whether you are enthusiastically greeting our guests, holding babies in the nursery, or playing the drums on stage, every volunteer has a part in the life transformation that happens each week at Destiny Worship Centre. Join a team and experience the joy of knowing that God used your life to make an eternal impact.`}
             </Text>
 
             <Subtitle>{`What's the Commitment?`}</Subtitle>
@@ -45,7 +45,7 @@ const Volunteer = () => {
             <Subtitle>Where can I serve?</Subtitle>
             <Text style={styles.content}>
               There are numerous teams that need volunteers in order for
-              Echo.Church to run as it does!
+              Destiny Worship Centre to run as it does!
             </Text>
             <Heading>
               Here are a few areas in which you can make a difference:
