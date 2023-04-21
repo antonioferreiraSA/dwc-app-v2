@@ -7,6 +7,7 @@ const colors = {
   lightGrayPurple: '#f7f7fb',
   pink: '#ff3d69',
   gray: '#797777',
+  gray2: '#374252',
   grayLight: '#aaaaaa',
   primary: '#788eec',
   secondary: '#dc143c',
@@ -23,7 +24,18 @@ const colors = {
   lightContainer: '#F5F7F8',
 
   // button
-  primaryButton: '#25AC68'
+  primaryButton: '#25AC68',
+
+  // minisub text
+  darksubtext: "#777",
+
+  // buttom nav
+  darknav: '#162336',
+  lightnav: '#F5F7F8',
+  darkborder: '#233040',
+  lightborder: '#E9EAEC',
+  iconsdark: '#fff',
+  iconslight: '#797777',
 
 
 

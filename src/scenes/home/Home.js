@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useContext, useLayoutEffect } from 'react'
-import { Text, View, ScrollView, StyleSheet, Image, Dimensions, Modal, Pressable , TouchableOpacity} from 'react-native'
+
+  import { Text,  Linking, View, ScrollView, StyleSheet, Image, Dimensions, Modal, Pressable , TouchableOpacity} from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import ScreenTemplate from '../../components/ScreenTemplate'
 import Button from '../../components/Button'
@@ -89,6 +90,11 @@ const [activeSlide, setActiveSlide] = useState(0);
   const navigation = useNavigation()
   const [token, setToken] = useState('')
   const { userData } = useContext(UserDataContext)
+  const youtubeURL = 'https://www.youtube.com/@DWCContent/streams';
+
+function openYoutubeApp() {
+  Linking.openURL(youtubeURL);
+}
 
   const isDark = scheme === 'dark'
   const colorScheme = {
@@ -199,17 +205,16 @@ const [activeSlide, setActiveSlide] = useState(0);
 
     ]}
     autoPlay={true}
-    showIndicator={false}
+
     preview={false}
     caroselImageStyle={{ resizeMode: 'cover', }}
     caroselImageContainerStyle={{resizeMode: 'cover',}}
     onItemChanged={(item) => console.log("item", item)}
     closeIconColor="#fff"
     caroselImageContainerStyle={styles.sliderContainer}
-
 />
 </View>
-<View style={styles.liveContainer}>
+<TouchableOpacity onPress={openYoutubeApp} style={styles.liveContainer}>
 <View style={styles.live}>
 <LottieView
 source={require("../../../assets/lottie/99714-go-live.json")}
@@ -218,7 +223,7 @@ autoPlay
 loop
 />
 </View>
-</View>
+</TouchableOpacity>
 
 
     <View style={[styles.container,]}  onPress={() => setModalVisible(true)} >
@@ -291,8 +296,6 @@ loop
     </View>
   </View>
 <View style={{paddingHorizontal: 20, paddingVertical: 20}}>
-
-
 </View>
 <View style={styles.liveContainer} onPress={() => setModalVisible(true)}>
 <TouchableOpacity
@@ -362,13 +365,14 @@ Ministries & Services
             textAlign: 'center',
             fontSize: 18,
             paddingVertical: 8,
+            color:colorScheme.text
           }}>
           {i.item.title}
         </Text>
         <Text font="regular"
           style={{
             textAlign: 'center',
-            color: '#000',
+            color:colorScheme.text,
             fontSize: 16,
             lineHeight: 16,
           }}>
@@ -470,7 +474,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   liveContainer: {
-    paddingTop: 10,
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',

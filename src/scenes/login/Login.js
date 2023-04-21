@@ -9,12 +9,15 @@ import { firestore } from '../../firebase/config'
 import { doc, getDoc } from 'firebase/firestore';
 import Spinner from 'react-native-loading-spinner-overlay'
 import { useNavigation } from '@react-navigation/native'
+import Colors from '../../../constants/Colors';
 import { colors, fontSize } from '../../theme';
 import { ColorSchemeContext } from '../../context/ColorSchemeContext'
 import { LogBox } from 'react-native';
 import { signInWithEmailAndPassword } from 'firebase/auth'
 import { auth } from '../../firebase/config'
 import { Ionicons, Feather, Fontisto, AntDesign, Entypo, FontAwesome5 } from '@expo/vector-icons';
+import * as WebBrowser from 'expo-web-browser'
+import logEvent from '../../../utils/logEvent'
 
 // To ignore a useless warning in terminal.
 // https://stackoverflow.com/questions/44603362/setting-a-timer-for-a-long-period-of-time-i-e-multiple-minutes
@@ -73,7 +76,7 @@ export default function Login() {
       source={require('../../../assets/images/images/adaptive-icon.png')}
     />
         <TextInputBox
-          placeholder='E-mail'
+          placeholder='Email address'
           onChangeText={(text) => setEmail(text)}
           autoCapitalize="none"
           value={email}
@@ -101,7 +104,18 @@ export default function Login() {
             {paddingHorizontal: 35, backgroundColor: 'transparent'},
             ]}>
           <TouchableOpacity
-            onPress={RestPress}>
+          onPress={() => {
+            logEvent('TAP Prayer Request Submit');
+            WebBrowser.openBrowserAsync(
+              'https://mobile.destinyworshipcentre.co.za/reset-password/',
+              { toolbarColor: Colors.darkestGray }
+            ).catch((err) => {
+              logEvent('ERROR with WebBrowser', { error: err });
+              WebBrowser.dismissBrowser();
+            });
+          }}
+          >
+
               <Text font="regular" style={styles.footerLink2}>
                 Forgot sign in details?{' '}
               </Text>
@@ -109,11 +123,16 @@ export default function Login() {
 
             <TouchableOpacity
               style={{backgroundColor: 'transparent'}}
-              onPress={() =>
-                Linking.openURL(
+              onPress={() => {
+                logEvent('TAP Prayer Request Submit');
+                WebBrowser.openBrowserAsync(
                   'https://mobile.destinyworshipcentre.co.za/wp-content/uploads/2023/03/Privacy-Policy-Destiny-Worship-Centre-Church-1.pdf',
-                )
-              }>
+                  { toolbarColor: Colors.darkestGray }
+                ).catch((err) => {
+                  logEvent('ERROR with WebBrowser', { error: err });
+                  WebBrowser.dismissBrowser();
+                });
+              }}>
               <Text font="regular" style={styles.footerLink2}>
                 Privacy Policy
               </Text>

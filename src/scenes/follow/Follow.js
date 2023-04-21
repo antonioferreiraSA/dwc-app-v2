@@ -17,7 +17,11 @@ const LatestVideosScreen = ({ navigation }) => {
   const { scheme, toggleScheme  } = useContext(ColorSchemeContext)
 const isDark = scheme === 'dark'
 const colorScheme = {
+  content: isDark? styles.darkContent : styles.lightContent,
+  text: isDark? colors.white : colors.primaryText,
   container: isDark? colors.darkContainer : colors.lightContainer,
+  container2: isDark? colors.darkContainer2 : colors.lightContainer,
+
 }
   const [videos, setVideos] = useState([]);
 
@@ -43,15 +47,15 @@ const colorScheme = {
 
   return (
     <View style={[styles.mainContainer, {backgroundColor: colorScheme.container}]}>
-      <Text XXL bold style={styles.headerTitle}>Latest Videos</Text>
+      <Text XXL bold style={[styles.headerTitle, { color: colorScheme.text }]}>Latest Videos</Text>
       <ScrollView contentContainerStyle={styles.scrollViewContainer}>
       {videos && videos.map(video => (
         <TouchableOpacity key={video.id} style={[styles.videoBlock,]} onPress={() => handleVideoPress(video.id, video.title)}>
-          <Subtitle style={styles.title2} >{video.title}</Subtitle>
+          <Subtitle style={[styles.title2, { color: colorScheme.text }]} >{video.title}</Subtitle>
 
 
           <Image source={{ uri: video.thumbnail }} style={styles.videoThumbnail} />
-          <FontAwesome name="play-circle-o" size={100} color="white"  style={styles.playIcon} />
+          <FontAwesome name="play-circle-o" size={100} color="white" color="rgba(255, 255, 255, 0.5)"  style={styles.playIcon} />
         </TouchableOpacity>
       ))}
       </ScrollView>

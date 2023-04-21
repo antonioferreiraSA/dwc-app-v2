@@ -65,6 +65,7 @@ export const ConnectNavigator = () => {
   name="PrayerRequest"
   component={PrayerRequest}
   options={({ navigation }) => ({
+    headerTitle: null,
 
     headerBackground: scheme === 'dark' ? null: () => <HeaderStyle />,
   })}
@@ -73,6 +74,8 @@ export const ConnectNavigator = () => {
 name="AdrianScreen"
 component={AdrianScreen}
 options={({ navigation }) => ({
+  title: 'Dr Adrian ',
+
 
   headerBackground: scheme === 'dark' ? null: () => <HeaderStyle />,
 })}

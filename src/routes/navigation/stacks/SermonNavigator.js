@@ -7,14 +7,21 @@ import { UserDataContext } from '../../../context/UserDataContext'
 import { lightProps, darkProps } from './navigationProps/navigationProps'
 import HeaderStyle from './headerComponents/HeaderStyle'
 import HeaderRightButton from '../../../components/HeaderRightButton'
-
+import { colors, fontSize } from '../../../theme'
 import { FollowFollowerNavigator } from '../toptabs/followfollowerNavigator'
 
 const Stack = createStackNavigator()
 const RootStack = createStackNavigator()
 
 export const SermonNavigator = () => {
-  const { scheme } = useContext(ColorSchemeContext)
+  const { scheme, toggleScheme  } = useContext(ColorSchemeContext)
+  const isDark = scheme === 'dark'
+  const colorScheme = {
+    text: isDark? colors.white : colors.primaryText,
+    container: isDark? colors.darknav : colors.lightnav,
+
+
+  }
   const { userData } = useContext(UserDataContext)
   const navigationProps = scheme === 'dark' ? darkProps:lightProps
 
@@ -25,8 +32,8 @@ export const SermonNavigator = () => {
           name="Connect"
           component={FollowFollowerNavigator}
           options={({ navigation }) => ({
+            title: 'Sermons',
             headerBackground: scheme === 'dark' ? null: () => <HeaderStyle />,
-            headerRight: () => <HeaderRightButton from='Connect' userData={userData} />
           })}
         />
       </RootStack.Group>

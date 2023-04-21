@@ -19,6 +19,7 @@ import { auth } from '../../firebase/config'
 import { showToast } from '../../utils/ShowToast'
 import Spinner from 'react-native-loading-spinner-overlay'
 import { TouchableOpacity } from 'react-native';
+import { Feather } from '@expo/vector-icons';
 
 export default function Edit() {
   const { userData } = useContext(UserDataContext)
@@ -146,9 +147,13 @@ export default function Edit() {
             onPress={ImageChoiceAndUpload}
             source={{ uri: avatar }}
           />
-          <TouchableOpacity onPress={ImageChoiceAndUpload}>
-          <Text>Update Profile Pic</Text>
-          </TouchableOpacity>
+          <TouchableOpacity onPress={ImageChoiceAndUpload} style={{paddingTop: 10}}>
+          <View style={styles.rowContainer}>
+            <Feather name="edit" size={26} color={colorScheme.text} />
+            <Text style={[styles.title1, {color: colorScheme.text}]}>Change Picture</Text>
+          </View>
+        </TouchableOpacity>
+
         </View>
         <Text style={colorScheme.progress}>{progress}</Text>
         <Text style={[styles.field, {color: colorScheme.text}]}>Name:</Text>
@@ -158,8 +163,7 @@ export default function Edit() {
           value={fullName}
           autoCapitalize="none"
         />
-        <Text style={[styles.field, {color: colorScheme.text}]}>Mail:</Text>
-        <Text style={[styles.title, {color: colorScheme.text}]}>{userData.email}</Text>
+
         <Button
           label='Update'
           color={colors.primary}
@@ -210,6 +214,11 @@ const styles = StyleSheet.create({
   progress: {
     alignSelf: 'center',
   },
+  rowContainer: {
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   darkprogress: {
     alignSelf: 'center',
     color: colors.white,
@@ -223,9 +232,16 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     textAlign: 'center'
   },
+  title1: {
+    fontSize: fontSize.middle,
+    paddingTop: 2,
+
+    textAlign: 'center'
+  },
   field: {
     fontSize: fontSize.middle,
-    textAlign: 'center',
+    paddingHorizontal: 35
+
   },
   avatar: {
     margin: 30,

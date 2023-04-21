@@ -10,6 +10,7 @@ const screenOptions= {
   tabBarLabelStyle: {
     fontSize: labelSize
   },
+
   tabBarActiveTintColor: colors.purple,
   tabBarInactiveTintColor: colors.lightPurple,
   tabBarShowLabel: true

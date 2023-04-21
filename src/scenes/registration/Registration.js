@@ -24,13 +24,16 @@ export default function Registration() {
   const [confirmPassword, setConfirmPassword] = useState('')
   const [spinner, setSpinner] = useState(false)
   const navigation = useNavigation()
+  const { scheme, toggleScheme  } = useContext(ColorSchemeContext)
   const isDark = scheme === 'dark'
   const colorScheme = {
+    content: isDark? styles.darkContent : styles.lightContent,
     text: isDark? colors.white : colors.primaryText,
-    textFooter: isDark? colors.white : colors.primaryText
+    container: isDark? colors.darkContainer : colors.lightContainer,
+    container2: isDark? colors.darkContainer2 : colors.lightContainer,
+
   }
 
-  const { scheme, toggleScheme  } = useContext(ColorSchemeContext)
   const icon = scheme === 'light' ? 'moon' : 'sun';
   const textmode = scheme === 'light' ? 'Change to dark mode' : 'Change to light mode';
   useEffect(() => {
@@ -87,7 +90,7 @@ export default function Registration() {
           autoCapitalize="none"
         />
         <TextInputBox
-          placeholder='E-mail'
+          placeholder='Email address'
           onChangeText={(text) => setEmail(text)}
           value={email}
           autoCapitalize="none"
@@ -107,7 +110,7 @@ export default function Registration() {
           value={confirmPassword}
           autoCapitalize="none"
         />
-        <Text style={[styles.link, {color: colorScheme.textFooter}]} onPress={() =>
+        <Text style={[styles.link, {color: colorScheme.text} ]} onPress={() =>
           Linking.openURL(
             'https://mobile.destinyworshipcentre.co.za/wp-content/uploads/2023/03/Privacy-Policy-Destiny-Worship-Centre-Church-1.pdf',
           )
@@ -173,7 +176,8 @@ const styles = StyleSheet.create({
     fontSize: fontSize.large
   },
   link: {
-    textAlign: 'center'
+    textAlign: 'center',
+    color: '#fff'
   },
   eulaLink: {
     color: colors.blueLight,

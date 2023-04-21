@@ -12,7 +12,7 @@ import {
 import { useSafeArea } from 'react-native-safe-area-context'
 import { HeaderHeightContext } from '@react-navigation/stack'
 import { Entypo } from '@expo/vector-icons';
-import { Feather } from '@expo/vector-icons';
+import { Feather, AntDesign } from '@expo/vector-icons';
 import logEvent from '../../../utils/logEvent'
 import * as WebBrowser from 'expo-web-browser';
 import Colors from '../../../constants/Colors'
@@ -47,6 +47,19 @@ const openMaps = (location) => {
 
 
 const Location = () => {
+  const phoneNumber = '+27116161795'
+  const handleCallPress = () => {
+    Linking.openURL(`tel:${phoneNumber}`);
+  };
+
+
+  const WhatsAppNumber = '+27764758245'; // Replace with the phone number you want to send a message to
+
+  const handleWhatsappPress = () => {
+    Linking.openURL(`https://wa.me/${WhatsAppNumber}?text=Good Day`);
+  };
+
+
   const navigation = useNavigation();
   const insets = useSafeArea();
   const { scheme, toggleScheme  } = useContext(ColorSchemeContext)
@@ -76,7 +89,7 @@ const Location = () => {
           <View style={[styles.container]}>
 
 
-            <Title center style={styles.heading}>
+            <Title center style={[styles.heading, {color:colorScheme.text}]}>
              Destiny Worship Center location & regular service time
             </Title>
 
@@ -96,7 +109,7 @@ const Location = () => {
               <Heading center style={styles.subContent}>
                 Every Wednesday at 7:00pm, 8:00pm,
               </Heading>
-              <Title center style={styles.heading}>
+              <Title center style={[styles.heading, {color:colorScheme.text}]}>
               Contact Us
              </Title>
 
@@ -105,12 +118,7 @@ const Location = () => {
   icon={<Entypo name="old-phone" size={24} color="white" />}
   title=" +27 11 616 1795"
   style={styles.checkIn}
-  onPress={() =>
-    openBrowser({
-      title: 'WhatsApp',
-      url: 'https://api.whatsapp.com/send/?phone=%2B27764758245&text&type=phone_number&app_absent=0',
-    })
-  }
+  onPress={handleCallPress}
 
 />
 <View style={{paddingVertical: 5}}/>
@@ -118,12 +126,23 @@ const Location = () => {
 icon={<FontAwesome5 name="whatsapp" size={24} color="white" />}
 title="WhatsApp"
 style={styles.checkIn}
-onPress={() =>
-  openBrowser({
-    title: 'WhatsApp',
-    url: 'https://api.whatsapp.com/send/?phone=%2B27764758245&text&type=phone_number&app_absent=0',
-  })
-}
+onPress={handleWhatsappPress}
+/>
+<View style={{paddingVertical: 5}}/>
+<Button
+icon={<AntDesign name="contacts" size={24} color="white" />}
+title="Contact Form"
+style={styles.checkIn}
+onPress={() => {
+  logEvent('TAP Prayer Request Submit');
+  WebBrowser.openBrowserAsync(
+    'https://mobile.destinyworshipcentre.co.za/contact-from/',
+    { toolbarColor: Colors.darkestGray }
+  ).catch((err) => {
+    logEvent('ERROR with WebBrowser', { error: err });
+    WebBrowser.dismissBrowser();
+  });
+}}
 />
 
             </View>
@@ -159,6 +178,7 @@ const styles = StyleSheet.create({
   subContent: {
     paddingHorizontal: 8,
     marginBottom: 10,
+    color: '#777',
   },
 })
 

@@ -15,20 +15,23 @@ import { colors, fontSize } from '../../theme'
 import { signOut, deleteUser } from 'firebase/auth'
 import { auth } from '../../firebase/config'
 import { Ionicons, Feather, Fontisto, AntDesign, Entypo, FontAwesome5 } from '@expo/vector-icons';
+import * as WebBrowser from 'expo-web-browser'
+import logEvent from '../../../utils/logEvent'
 
 export default function Profile() {
   const { userData, setUserData } = useContext(UserDataContext)
   const navigation = useNavigation()
   const [visible, setVisible] = useState(false)
   const [outvisible, setOutVisible] = useState(false)
+  const [visiblee, setVisiblee] = useState(false);
 
   const [spinner, setSpinner] = useState(false)
+  const { scheme, toggleScheme  } = useContext(ColorSchemeContext)
   const isDark = scheme === 'dark'
   const colorScheme = {
-    text: isDark? colors.white : colors.primaryText
+    text: isDark? colors.white : colors.primaryText,
   }
 
-  const { scheme, toggleScheme  } = useContext(ColorSchemeContext)
   const icon = scheme === 'light' ? 'moon' : 'sun';
   const textmode = scheme === 'light' ? 'Change to dark mode' : 'Change to light mode';
 
@@ -88,6 +91,7 @@ export default function Profile() {
     }
   }
 
+
   return (
     <ScreenTemplate>
       <ScrollView style={styles.main}>
@@ -104,14 +108,37 @@ export default function Profile() {
         <Text style={[styles.field, { color: colorScheme.text }]}>Mail:</Text>
         <Text style={[styles.title, { color: colorScheme.text }]}>{userData.email}</Text>
         <Button
-          label='Edit'
+          label='Edit Profile'
           color={colors.primary}
           onPress={goDetail}
         />
         <Button
+          label='Technical Support'
+          color={colors.primary}
+          onPress={() => {
+            logEvent('TAP Prayer Request Submit');
+            WebBrowser.openBrowserAsync(
+              'https://mobile.destinyworshipcentre.co.za/tecincal-support/',
+              { toolbarColor: Colors.darkestGray }
+            ).catch((err) => {
+              logEvent('ERROR with WebBrowser', { error: err });
+              WebBrowser.dismissBrowser();
+            });
+          }}
+        />
+        <Button
           label='Account delete'
           color={colors.secondary}
-          onPress={showDialog}
+          onPress={() => {
+            logEvent('TAP Prayer Request Submit');
+            WebBrowser.openBrowserAsync(
+              'https://mobile.destinyworshipcentre.co.za/delete-account/',
+              { toolbarColor: Colors.darkestGray }
+            ).catch((err) => {
+              logEvent('ERROR with WebBrowser', { error: err });
+              WebBrowser.dismissBrowser();
+            });
+          }}
         />
         <Button
         label='Sign Out'
@@ -123,7 +150,7 @@ export default function Profile() {
           <TouchableOpacity onPress={toggleScheme} style={styles.ModeStyle2}>
             <FontAwesome5 name={icon} size={24} color="white" />
           </TouchableOpacity>
-          <Text>{textmode}</Text>
+          <Text style={[styles.footerText, { color: colorScheme.text }]}>{textmode}</Text>
         </View>
 
 
@@ -139,14 +166,7 @@ export default function Profile() {
 
 
 
-      <Dialog.Container visible={visible}>
-        <Dialog.Title>Account delete</Dialog.Title>
-        <Dialog.Description>
-          Do you want to delete this account? You cannot undo this action.
-        </Dialog.Description>
-        <Dialog.Button label="Cancel" onPress={handleCancel} />
-        <Dialog.Button label="Delete" onPress={accountDelete} />
-      </Dialog.Container>
+
 
       <Spinner
         visible={spinner}
