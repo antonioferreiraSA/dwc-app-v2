@@ -53,12 +53,6 @@ const colorScheme = {
   </Text>
 </View>
 
-    <Button
-    icon={<AntDesign name="back" size={23} color={Colors.white} />}
-    title="Back to Sermons"
-    style={[styles.checkIn2, {backgroundColor: '#212931'}]}
-    onPress={handleBackPress}
-  />
   <Button
     icon={<Fontisto name="youtube-play" onPress={openYoutubeApp} size={23} color={Colors.white} />}
     title="Subscribe to Channel"
