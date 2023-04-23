@@ -16,8 +16,8 @@ import AdrianScreen from '../../../scenes/Adrian/Adrian'
 import Give from '../../../scenes/Give'
 import BaptismScreen from '../../../scenes/Baptism/Baptism'
 import Volunteer from '../../../scenes/Volunteer/Volunteer'
+import Announcments from '../../../scenes/Announcments/Announcments'
 const Stack = createStackNavigator()
-const Drawer = createDrawerNavigator()
 
 const HomeStack = () => {
   const { scheme } = useContext(ColorSchemeContext)
@@ -107,6 +107,13 @@ const HomeStack = () => {
         headerBackground: scheme === 'dark' ? null: () => <HeaderStyle />,
       }}
     />
+    <Stack.Screen
+    name="Announcments"
+    component={Announcments}
+    options={{
+      headerBackground: scheme === 'dark' ? null: () => <HeaderStyle />,
+    }}
+  />
           </Stack.Navigator>
         )}
       </HomeTitleContext.Consumer>

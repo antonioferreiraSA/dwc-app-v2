@@ -111,6 +111,9 @@ function openYoutubeApp() {
   const goEvents = () => {
     navigation.navigate('Events')
   }
+  const Announcments = () => {
+    navigation.navigate('Announcments')
+  }
   const goSermons = () => {
     navigation.navigate('Sermons')
   }
@@ -296,14 +299,10 @@ loop
   </View>
 <View style={{paddingHorizontal: 20, paddingVertical: 20}}>
 </View>
-<View style={styles.liveContainer} onPress={() => setModalVisible(true)}>
+<View style={styles.liveContainer} >
 <TouchableOpacity
 style={styles.live}
-onPress={() => {
-  navigation.navigate('ModalStacks', {
-    screen: 'Announcments'
-  })
-}}
+onPress={Announcments}
  >
 <Image
 source={require('../../../assets/images/banner.png')}

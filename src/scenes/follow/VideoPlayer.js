@@ -1,5 +1,5 @@
 import React, {useContext} from 'react';
-import { StyleSheet, Text, View, Dimensions, TouchableOpacity, Image } from 'react-native';
+import { StyleSheet, Text, View, Dimensions, TouchableOpacity, Image, Linking } from 'react-native';
 import { WebView } from 'react-native-webview';
 import { ColorSchemeContext } from '../../context/ColorSchemeContext'
 import { colors, fontSize } from '../../theme'
@@ -8,6 +8,7 @@ import { AntDesign, Feather, Fontisto } from '@expo/vector-icons'
 import Colors from '../../../constants/Colors'
 
 const VideoPlayerScreen = ({ route, navigation }) => {
+  const youtubeURL = 'https://www.youtube.com/channel/UCJ3J0grUampl4mkzqoBWmAA';
   function openYoutubeApp() {
     Linking.openURL(youtubeURL);
   }

@@ -3,7 +3,7 @@ import { SafeAreaView } from 'react-native';
 import WebView from 'react-native-webview';
 
 const Announcments = () => {
-  const [uri, setUri] = useState('https://mobile.destinyworshipcentre.co.za/announcements/');
+  const [uri, setUri] = useState('https://mobile.destinyworshipcentre.co.za/elementor-324/');
 
   useEffect(() => {
     const intervalId = setInterval(() => {
