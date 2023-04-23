@@ -13,7 +13,7 @@ import { colors, fontSize } from '../../theme'
 import { ColorSchemeContext } from '../../context/ColorSchemeContext'
 
 
-const YOUTUBE_API_KEY = 'AIzaSyDYmZpJk2TlDycX5vGZcIbMeh3cDLKWggM';
+const YOUTUBE_API_KEY = 'AIzaSyDRlcySTdfFHGO1RuIdvkFEU40Tuc1TALo';
 const PLAYLIST_ID = 'PLceXGIxnj2XcS5yLQF4Wg-pMAcX2Xkpgc';
 
 

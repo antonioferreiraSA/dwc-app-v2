@@ -17,13 +17,13 @@ import { auth } from '../../firebase/config'
 import { Ionicons, Feather, Fontisto, AntDesign, Entypo, FontAwesome5 } from '@expo/vector-icons';
 import * as WebBrowser from 'expo-web-browser'
 import logEvent from '../../../utils/logEvent'
+import Colors from '../../../constants/Colors'
 
 export default function Profile() {
   const { userData, setUserData } = useContext(UserDataContext)
   const navigation = useNavigation()
   const [visible, setVisible] = useState(false)
   const [outvisible, setOutVisible] = useState(false)
-  const [visiblee, setVisiblee] = useState(false);
 
   const [spinner, setSpinner] = useState(false)
   const { scheme, toggleScheme  } = useContext(ColorSchemeContext)
@@ -62,7 +62,7 @@ export default function Profile() {
   }
 
   const handleCancel = () => {
-    setVisible(false)
+    setOutVisible(false)
   }
 
   const accountDelete = async () => {

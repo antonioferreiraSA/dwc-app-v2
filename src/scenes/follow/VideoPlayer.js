@@ -10,6 +10,7 @@ const VideoPlayerScreen = ({ route, navigation }) => {
   const isDark = scheme === 'dark'
 const colorScheme = {
   container: isDark? colors.darkContainer : colors.lightContainer,
+  text: isDark? colors.white : colors.primaryText,
 }
 
   const { videoId, videoTitle,  } = route.params;
@@ -32,13 +33,13 @@ const colorScheme = {
         />
       </View>
       <View style={styles.titleContainer}>
-        <Text style={styles.videoTitle}>{videoTitle}</Text>
+        <Text style={[styles.videoTitle, {color:colorScheme.text}]}>{videoTitle}</Text>
 
 
       </View>
       <TouchableOpacity onPress={handleBackPress} style={styles.backButton}>
-      <AntDesign name="back" size={34} color="black" />
-      <Text style={styles.videoTitle}>Back to Sermons</Text>
+      <AntDesign name="back" size={34} color={colorScheme.text} />
+      <Text  style={[styles.videoTitle, {color:colorScheme.text}]}>Back to Sermons</Text>
     </TouchableOpacity>
     </View>
   );

@@ -1,3 +1,4 @@
+import Config from 'react-native-config'
 import React, { useState, useEffect, useContext } from 'react';
 import { StyleSheet, View, ScrollView, Image, TouchableOpacity } from 'react-native';
 import { ColorSchemeContext } from '../../context/ColorSchemeContext'
@@ -7,7 +8,6 @@ import { Text, Subtitle } from '../../components/shared/Typography'
 import { useSafeArea } from 'react-native-safe-area-context'
 import { colors, fontSize } from '../../theme'
 import { FontAwesome } from '@expo/vector-icons';
-
 
 const YOUTUBE_API_KEY = 'AIzaSyDRlcySTdfFHGO1RuIdvkFEU40Tuc1TALo';
 const CHANNEL_ID = 'UCJ3J0grUampl4mkzqoBWmAA';
