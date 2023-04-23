@@ -17,6 +17,7 @@ import Give from '../../../scenes/Give'
 import BaptismScreen from '../../../scenes/Baptism/Baptism'
 import Volunteer from '../../../scenes/Volunteer/Volunteer'
 import Announcments from '../../../scenes/Announcments/Announcments'
+import SundaySchool from '../../../scenes/SundaySchool/SundaySchool'
 const Stack = createStackNavigator()
 
 const HomeStack = () => {
@@ -114,6 +115,13 @@ const HomeStack = () => {
       headerBackground: scheme === 'dark' ? null: () => <HeaderStyle />,
     }}
   />
+  <Stack.Screen
+  name="SundaySchool"
+  component={SundaySchool}
+  options={{
+    headerBackground: scheme === 'dark' ? null: () => <HeaderStyle />,
+  }}
+/>
           </Stack.Navigator>
         )}
       </HomeTitleContext.Consumer>

@@ -18,6 +18,7 @@ import video from '../../../assets/loader.mp4'
 import axios from 'axios';
 import { Video, ResizeMode } from 'expo-av';
 import Hands from "./Hands";
+import {SermonNavigator} from '../../routes/navigation/stacks/SermonNavigator'
 import PaginationDot from 'react-native-animated-pagination-dot';
 import Carousel, { Pagination } from "react-native-snap-carousel";
 import { Ionicons, Feather, Fontisto, AntDesign, Entypo, FontAwesome5 } from '@expo/vector-icons';
@@ -125,6 +126,9 @@ function openYoutubeApp() {
   }
   const goBaptim = () => {
     navigation.navigate('Baptism')
+  }
+  const SundaySchool = () => {
+    navigation.navigate('SundaySchool')
   }
   <View style={styles.avatar}>
   <Avatar
@@ -264,12 +268,14 @@ loop
         </TouchableOpacity>
       </View>
       <View style={styles.block}>
+      <TouchableOpacity onPress={SundaySchool}>
         <Image
           source={{ uri: 'https://mobile.destinyworshipcentre.co.za/wp-content/uploads/2023/04/cdc-8LITuYkZRIo-unsplash.jpg' }}
           style={styles.image}
         />
         <Text style={[styles.title, { color: colorScheme.text }]}>Sunday School</Text>
         <Text style={styles.text}>Parents Add your Child</Text>
+        </TouchableOpacity>
       </View>
     </View>
     <View style={[styles.row, {backgroundColor: colorScheme.container}]}>
