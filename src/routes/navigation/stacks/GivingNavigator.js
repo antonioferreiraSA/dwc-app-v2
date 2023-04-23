@@ -13,7 +13,6 @@ const Stack = createStackNavigator()
 export const GivingNavigator = () => {
   const { scheme } = useContext(ColorSchemeContext)
   const navigationProps = scheme === 'dark' ? darkProps:lightProps
-  const [title, setTitle] = useState('default title')
   return (
     <HomeTitleContext.Provider
       value={{

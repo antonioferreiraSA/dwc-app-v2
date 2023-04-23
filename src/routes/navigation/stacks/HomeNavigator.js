@@ -22,7 +22,6 @@ const Drawer = createDrawerNavigator()
 const HomeStack = () => {
   const { scheme } = useContext(ColorSchemeContext)
   const navigationProps = scheme === 'dark' ? darkProps:lightProps
-  const [title, setTitle] = useState('default title')
 
   return (
 

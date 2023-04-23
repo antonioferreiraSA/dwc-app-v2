@@ -9,14 +9,9 @@ import Announcments from "../../../../scenes/Announcments/Announcments";
 const Stack = createStackNavigator()
 
 export const ModalStacks = () => {
-  const [title, setTitle] = useState('default title')
 
   return (
     <HomeTitleContext.Provider
-      value={{
-        title,
-        setTitle,
-      }}
     >
       <HomeTitleContext.Consumer>
         {(ctx) => (
