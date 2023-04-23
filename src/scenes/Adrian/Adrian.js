@@ -20,7 +20,7 @@ const PLAYLIST_ID = 'PLceXGIxnj2XcS5yLQF4Wg-pMAcX2Xkpgc';
 
 const AdrianScreen = () => {
   const handleVideoPress = (videoId, videoTitle) => {
-    navigation.navigate('VideoPlayerScreen', { videoId, videoTitle });
+    navigation.navigate('VideoPlayer', { videoId, videoTitle });
   };
   const [videos, setVideos] = useState([]);
   const { scheme, toggleScheme  } = useContext(ColorSchemeContext)

@@ -16,6 +16,7 @@ import { FollowFollowerNavigator } from '../toptabs/followfollowerNavigator'
 import More from '../../../scenes/More'
 import Connect from '../../../scenes/connect'
 import AdrianScreen from '../../../scenes/Adrian/Adrian'
+import VideoPlayerScreen from '../../../scenes/Adrian/VideoPlayera'
 const Stack = createStackNavigator()
 const RootStack = createStackNavigator()
 
@@ -89,8 +90,8 @@ options={({ navigation }) => ({
 })}
 />
 <Stack.Screen
-name="More"
-component={More}
+name="VideoPlayer"
+component={VideoPlayerScreen}
 options={({ navigation }) => ({
 
   headerBackground: scheme === 'dark' ? null: () => <HeaderStyle />,
