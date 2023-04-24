@@ -18,6 +18,7 @@ import BaptismScreen from '../../../scenes/Baptism/Baptism'
 import Volunteer from '../../../scenes/Volunteer/Volunteer'
 import Announcments from '../../../scenes/Announcments/Announcments'
 import SundaySchool from '../../../scenes/SundaySchool/SundaySchool'
+import VideoPlayerScreen from '../../../scenes/Adrian/VideoPlayera'
 const Stack = createStackNavigator()
 
 const HomeStack = () => {
@@ -122,6 +123,15 @@ const HomeStack = () => {
     headerBackground: scheme === 'dark' ? null: () => <HeaderStyle />,
   }}
 />
+
+<Stack.Screen
+name="VideoPlayer"
+component={VideoPlayerScreen}
+options={{
+  headerBackground: scheme === 'dark' ? null: () => <HeaderStyle />,
+}}
+/>
+
           </Stack.Navigator>
         )}
       </HomeTitleContext.Consumer>
