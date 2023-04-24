@@ -9,6 +9,7 @@ import { decode, encode } from 'base-64'
 import { colors, fontSize } from '../../theme';
 import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from '../../firebase/config';
+import LottieView from 'lottie-react-native';
 import { useAtom } from 'jotai'
 import { checkedAtom, loggedInAtom } from '../../utils/atom';
 if (!global.btoa) { global.btoa = encode }
@@ -45,6 +46,12 @@ export default function Initial() {
   return (
     <ScreenTemplate>
       <View style={[styles.container, {backgroundColor: colorScheme.container}]}>
+      <LottieView
+      source={require('../../../assets/lottie/loginloader.json')}
+      autoPlay
+      loop
+      style={[styles.loader, { alignSelf: 'center', width: 200, height: 200 }]}
+    />
         <Text style={[styles.title, {color: colorScheme.text}]}>loading...</Text>
       </View>
     </ScreenTemplate>
