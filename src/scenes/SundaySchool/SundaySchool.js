@@ -25,7 +25,7 @@ const SundaySchool = () => {
     <View style={[styles.mainContainer, {backgroundColor: colorScheme.container}]}>
         <ScrollView >
           <Image
-            source={require('../../../assets/images/images/bap.jpeg')}
+            source={{uri: 'https://mobile.destinyworshipcentre.co.za/wp-content/uploads/2023/08/DWC-Sunday-School.png'}}
             style={styles.image}
           />
           <View style={[styles.container]}>

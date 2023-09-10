@@ -1,4 +1,4 @@
-package io.dwc.app;
+package io.destiny.app;
 
 import android.app.Application;
 import android.content.res.Configuration;

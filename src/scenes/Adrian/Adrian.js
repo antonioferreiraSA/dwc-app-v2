@@ -70,13 +70,11 @@ const AdrianScreen = () => {
     <View style={[styles.mainContainer, {backgroundColor:colorScheme.container2}]}>
         <ScrollView >
           <Image
-            source={require('../../../assets/images/DrA.jpg')}
+            source={{uri:'https://mobile.destinyworshipcentre.co.za/wp-content/uploads/2023/08/Dr-Adrian-Legacy.png'}}
             style={styles.image}
           />
           <View style={[styles.container]}>
-            <Title style={[styles.heading, {color:colorScheme.text}]}>
-            Dr Adrian Naidoo - Legacy
-            </Title>
+           
             <Title style={[styles.heading2, {color:colorScheme.text}]}>
             25.06.1976 - 04.02.2021
             </Title>

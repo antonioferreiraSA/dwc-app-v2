@@ -1,4 +1,4 @@
-package io.dwc.app;
+package io.destiny.app;
 
 import android.os.Build;
 import android.os.Bundle;

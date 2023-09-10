@@ -15,7 +15,6 @@ import { sendNotification } from '../../utils/SendNotification'
 import { Avatar } from '@rneui/themed';
 import { openBrowser } from '../../../utils/openBrowser'
 import video from '../../../assets/loader.mp4'
-import axios from 'axios';
 import { Video, ResizeMode } from 'expo-av';
 import Hands from "./Hands";
 import {SermonNavigator} from '../../routes/navigation/stacks/SermonNavigator'
@@ -23,6 +22,9 @@ import PaginationDot from 'react-native-animated-pagination-dot';
 import Carousel, { Pagination } from "react-native-snap-carousel";
 import { Ionicons, Feather, Fontisto, AntDesign, Entypo, FontAwesome5 } from '@expo/vector-icons';
 import Colors from '../../../constants/Colors'
+import axios from 'axios';
+import cheerio from 'cheerio';
+
 
 
 
@@ -192,7 +194,32 @@ function openYoutubeApp() {
     />
   );
 
+  const [sliderImages, setSliderImages] = useState([]);
+  useEffect(() => {
+    const API_ENDPOINT = 'https://mobile.destinyworshipcentre.co.za/wp-json/wp/v2/slider_images';
 
+    axios
+      .get(API_ENDPOINT)
+      .then(response => {
+        const imagesData = response.data;
+        const imageUrls = extractImageUrls(imagesData);
+        setSliderImages(imageUrls);
+      })
+      .catch(error => {
+        console.error('Error fetching images:', error);
+      });
+  }, []);
+
+  const extractImageUrls = imagesData => {
+    const imageUrls = [];
+    imagesData.forEach(imageData => {
+      const $ = cheerio.load(imageData.content.rendered);
+      $('img').each((index, element) => {
+        imageUrls.push(element.attribs.src);
+      });
+    });
+    return imageUrls;
+  };
 
   return (
     <ScreenTemplate>
@@ -200,25 +227,19 @@ function openYoutubeApp() {
 
       <View style={styles.imageblock}>
 
-      <ImageSlider
-
-    data={[
-        {img: 'https://scontent-jnb1-1.xx.fbcdn.net/v/t39.30808-6/335169206_5765943926807127_5547858879268134526_n.jpg?stp=cp6_dst-jpg&_nc_cat=106&ccb=1-7&_nc_sid=8bfeb9&_nc_ohc=-6Nl1AMc7q4AX8Pg6u4&_nc_ht=scontent-jnb1-1.xx&oh=00_AfD3NUXwQYwpCytIV864iWXq5MaC8FDg3LZ96gZrvI_2Ow&oe=644B10D4'},
-        {img: 'https://scontent-jnb1-1.xx.fbcdn.net/v/t39.30808-6/329280405_992632271901405_7814909072005718522_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=730e14&_nc_ohc=h0J5_j8T0ncAX-NWxvQ&_nc_ht=scontent-jnb1-1.xx&oh=00_AfCwxhuvCVcD_qGP8uYoaxYyG1Yn_CBZyRqU7nr6q_ct3A&oe=64499A49'},
-        {img: 'https://scontent-jnb1-1.xx.fbcdn.net/v/t39.30808-6/325656469_1248187105778305_72010939878505424_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=730e14&_nc_ohc=DWGbHI8jtXsAX8O5S68&_nc_ht=scontent-jnb1-1.xx&oh=00_AfBatd-LCwtJDU0njjLIXRwtNa2KzeHU5dHurD0p48Xxfw&oe=644A18A5'},
-        {img: 'https://scontent-jnb1-1.xx.fbcdn.net/v/t39.30808-6/325656469_1248187105778305_72010939878505424_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=730e14&_nc_ohc=DWGbHI8jtXsAX8O5S68&_nc_ht=scontent-jnb1-1.xx&oh=00_AfBatd-LCwtJDU0njjLIXRwtNa2KzeHU5dHurD0p48Xxfw&oe=644A18A5'},
-
-
-    ]}
-    autoPlay={true}
-
-    preview={false}
-    caroselImageStyle={{ resizeMode: 'cover', }}
-    caroselImageContainerStyle={{resizeMode: 'cover',}}
-    onItemChanged={(item) => console.log("item", item)}
-    closeIconColor="#fff"
-    caroselImageContainerStyle={styles.sliderContainer}
-/>
+      {sliderImages.length > 0 ? (
+        <ImageSlider
+          data={sliderImages.map(img => ({ img }))}
+          autoPlay={true}
+          preview={false}
+          caroselImageStyle={{ resizeMode: "contain" }}
+          onItemChanged={item => console.log('item', item)}
+          closeIconColor="#fff"
+          caroselImageContainerStyle={styles.sliderContainer}
+        />
+      ) : (
+        <Text>Loading...</Text>
+      )}
 </View>
 <TouchableOpacity onPress={openYoutubeApp} style={styles.liveContainer}>
 <View style={styles.live}>
@@ -248,7 +269,7 @@ loop
       <View style={styles.block}>
       <TouchableOpacity onPress={goSermons}>
         <Image
-          source={{ uri: 'https://mobile.destinyworshipcentre.co.za/wp-content/uploads/2023/04/edward-cisneros-QSa-uv4WJ0k-unsplash.jpg' }}
+          source={require('../../../assets/images/home-grid/DWCSermons.png')}
           style={styles.image}
         />
         <Text style={[styles.title, { color: colorScheme.text }]}>Sermons</Text>
@@ -270,7 +291,7 @@ loop
       <View style={styles.block}>
       <TouchableOpacity onPress={SundaySchool}>
         <Image
-          source={{ uri: 'https://mobile.destinyworshipcentre.co.za/wp-content/uploads/2023/04/cdc-8LITuYkZRIo-unsplash.jpg' }}
+          source={require('../../../assets/images/home-grid/DWCSundaySchool.png')}
           style={styles.image}
         />
         <Text style={[styles.title, { color: colorScheme.text }]}>Sunday School</Text>
@@ -284,7 +305,7 @@ loop
       onPress={goVolenteer}
       >
         <Image
-          source={{ uri: 'https://mobile.destinyworshipcentre.co.za/wp-content/uploads/2023/04/1212.jpeg' }}
+           source={require('../../../assets/images/home-grid/DWCVolunteer.png')}
           style={styles.image}
         />
         <Text style={[styles.title, { color: colorScheme.text }]}>Volunteer</Text>
@@ -424,7 +445,7 @@ const styles = StyleSheet.create({
     marginRight: 30,
   },
   sliderContainer: {
-    height: "60%",
+    height: "75%",
     justifyContent: "center",
     alignItems: "center",
   },

@@ -35,6 +35,10 @@ const Volunteer = () => {
         <ScrollView
           style={[styles.mainContainer, {backgroundColor: colorScheme.container}]}
         >
+           <Image
+            source={{uri: 'https://mobile.destinyworshipcentre.co.za/wp-content/uploads/2023/08/DWC-Volunteer.png'}}
+            style={styles.image}
+          />
 
           <View style={[styles.container]}>
             <Title style={[styles.heading, {color:colorScheme.text}]}>Volunteering</Title>
@@ -102,8 +106,8 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   image: {
-    width: '100%',
-    height: 300,
+    
+    height: 250,
   },
   container: {
     paddingVertical: 20,

@@ -113,9 +113,9 @@ android {
 
     compileSdkVersion rootProject.ext.compileSdkVersion
 
-    namespace 'io.dwc.app'
+    namespace 'io.destiny.app'
     defaultConfig {
-        applicationId 'io.dwc.app'
+        applicationId 'io.destiny.app'
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

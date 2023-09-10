@@ -28,7 +28,7 @@ const PrayerRequest = () => {
           style={[styles.mainContainer, {backgroundColor: colorScheme.container}]}
         >
           <Image
-            source={require('../../../assets/images/images/connect_bg.png')}
+            source={{uri: 'https://mobile.destinyworshipcentre.co.za/wp-content/uploads/2023/08/DWC-Prayer-Requests.png'}}
             style={styles.image}
           />
           <View style={[styles.container]}>
