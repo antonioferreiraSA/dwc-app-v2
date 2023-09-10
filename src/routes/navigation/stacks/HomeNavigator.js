@@ -112,9 +112,7 @@ const HomeStack = () => {
     <Stack.Screen
     name="Announcments"
     component={Announcments}
-    options={{
-      headerBackground: scheme === 'dark' ? null: () => <HeaderStyle />,
-    }}
+    options={{ headerShown: false, tabBarVisible: false }}
   />
   <Stack.Screen
   name="SundaySchool"

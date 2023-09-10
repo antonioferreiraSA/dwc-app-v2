@@ -1,23 +1,175 @@
-import React, { useState, useEffect } from 'react';
-import { SafeAreaView } from 'react-native';
-import WebView from 'react-native-webview';
+import React, { useState, useEffect, useRef } from 'react';
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  TouchableOpacity,
+  ScrollView,
+  Dimensions,
+} from 'react-native';
+import axios from 'axios';
 
-const Announcments = () => {
-  const [uri, setUri] = useState('https://mobile.destinyworshipcentre.co.za/elementor-324/');
+const StatusComponent = () => {
+  const [sliderImages, setSliderImages] = useState([]);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const windowWidth = Dimensions.get('window').width;
+  const scrollRef = useRef(null);
 
   useEffect(() => {
-    const intervalId = setInterval(() => {
-      setUri(uri => uri); // This triggers a re-render and refreshes the WebView
-    }, 60000); // Refresh every 5 seconds
+    // Fetch data initially
+    fetchData();
 
-    return () => clearInterval(intervalId); // Clean up the interval when the component unmounts
+    // Set up a timer to fetch data periodically (every minute)
+    const dataFetchInterval = setInterval(() => {
+      fetchData();
+    }, 60000); // 60,000 milliseconds = 1 minute
+
+    // Clean up the interval timer when the component unmounts
+    return () => {
+      clearInterval(dataFetchInterval);
+    };
   }, []);
 
+  const fetchData = () => {
+    const API_ENDPOINT = 'https://mobile.destinyworshipcentre.co.za/wp-json/wp/v2/word_of_the_day';
+
+    axios
+      .get(API_ENDPOINT)
+      .then(response => {
+        const imagesData = response.data;
+        const imageUrls = extractImageUrls(imagesData);
+        setSliderImages(imageUrls);
+      })
+      .catch(error => {
+        console.error('Error fetching images:', error);
+      });
+  };
+
+  const extractImageUrls = imagesData => {
+    const imageUrls = [];
+    imagesData.forEach(imageData => {
+      const content = imageData.content.rendered;
+      const regex = /<img[^>]+src="(https:\/\/[^">]+)"/g;
+      let match;
+      while ((match = regex.exec(content))) {
+        imageUrls.push(match[1]);
+      }
+    });
+    return imageUrls;
+  };
+
+  const handleNext = () => {
+    if (currentIndex < sliderImages.length - 1) {
+      setCurrentIndex(currentIndex + 1);
+      scrollRef.current.scrollTo({
+        x: (currentIndex + 1) * windowWidth,
+        animated: true,
+      });
+    }
+  };
+
+  const handlePrevious = () => {
+    if (currentIndex > 0) {
+      setCurrentIndex(currentIndex - 1);
+      scrollRef.current.scrollTo({
+        x: (currentIndex - 1) * windowWidth,
+        animated: true,
+      });
+    }
+  };
+
+  useEffect(() => {
+    const autoNextSlide = setInterval(() => {
+      handleNext();
+    }, 10000);
+
+    return () => {
+      clearInterval(autoNextSlide);
+    };
+  }, [currentIndex]);
+
   return (
-    <SafeAreaView style={{flex:1}}>
-      <WebView source={{uri}} />
-    </SafeAreaView>
+    <View style={styles.container}>
+      {/* Header */}
+      <View style={styles.header}>
+        <View style={styles.headerBlockContainer}>
+          {sliderImages.map((_, index) => (
+            <View
+              key={index}
+              style={[
+                styles.headerBlock,
+                index === currentIndex ? styles.activeHeaderBlock : null,
+              ]}
+            />
+          ))}
+        </View>
+        <TouchableOpacity onPress={handlePrevious}>
+          <Text style={styles.backButton}>Back</Text>
+        </TouchableOpacity>
+      </View>
+
+      {/* Status Content */}
+      <ScrollView
+        horizontal
+        pagingEnabled
+        showsHorizontalScrollIndicator={false}
+        style={{ flex: 1 }}
+        contentContainerStyle={{ width: windowWidth * sliderImages.length }}
+        onScroll={e => {
+          const offset = e.nativeEvent.contentOffset.x;
+          const index = Math.floor(offset / windowWidth);
+          setCurrentIndex(index);
+        }}
+        ref={scrollRef}
+      >
+        {sliderImages.map((imageUrl, index) => (
+          <View key={index} style={{ width: windowWidth }}>
+            <Image source={{ uri: imageUrl }} style={styles.statusImage} />
+          </View>
+        ))}
+      </ScrollView>
+
+      {/* Loader */}
+      {sliderImages.length === 0 && <Text>Loading...</Text>}
+    </View>
   );
 };
 
-export default Announcments;
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    paddingTop: 70,
+    backgroundColor: 'black',
+  },
+  header: {
+    padding: 16,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  headerBlockContainer: {
+    flexDirection: 'row',
+  },
+  headerBlock: {
+    width: 28,
+    height: 8,
+    borderRadius: 4,
+    backgroundColor: 'white',
+    margin: 4,
+  },
+  activeHeaderBlock: {
+    backgroundColor: 'green', // Change this color as desired
+  },
+  backButton: {
+    color: 'white',
+    fontSize: 18,
+  },
+  statusImage: {
+    flex: 1,
+    resizeMode: 'cover',
+    width: Dimensions.get('window').width,
+  },
+});
+
+export default StatusComponent;
