@@ -93,6 +93,9 @@ const StatusComponent = () => {
     <View style={styles.container}>
       {/* Header */}
       <View style={styles.header}>
+      <TouchableOpacity onPress={handlePrevious}>
+          <Text style={styles.backButton}>Back</Text>
+        </TouchableOpacity>
         <View style={styles.headerBlockContainer}>
           {sliderImages.map((_, index) => (
             <View
@@ -104,9 +107,7 @@ const StatusComponent = () => {
             />
           ))}
         </View>
-        <TouchableOpacity onPress={handlePrevious}>
-          <Text style={styles.backButton}>Back</Text>
-        </TouchableOpacity>
+       
       </View>
 
       {/* Status Content */}
@@ -139,17 +140,25 @@ const StatusComponent = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 70,
+  
     backgroundColor: 'black',
   },
   header: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
     padding: 16,
+    paddingTop: 60,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+    zIndex: 1, // Ensure it's above the images
   },
+
   headerBlockContainer: {
     flexDirection: 'row',
+    
   },
   headerBlock: {
     width: 28,
@@ -164,11 +173,13 @@ const styles = StyleSheet.create({
   backButton: {
     color: 'white',
     fontSize: 18,
+    marginRight: 'auto', // Push the back button to the left
   },
   statusImage: {
     flex: 1,
     resizeMode: 'cover',
     width: Dimensions.get('window').width,
+    height: Dimensions.get('window').height, 
   },
 });
 

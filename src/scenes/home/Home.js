@@ -35,6 +35,24 @@ export default function Home() {
   const deviceWidth = Dimensions.get('window').width;
     const { scheme, toggleScheme  } = useContext(ColorSchemeContext)
     const icon = scheme === 'light' ? 'moon' : 'sun';
+    const [imageIndex, setImageIndex] = useState(0);
+    const images = [
+      require('../../../assets/images/WOTD/8.png'),
+      require('../../../assets/images/WOTD/3.png'),
+      require('../../../assets/images/WOTD/4.png'),
+      require('../../../assets/images/WOTD/1.png'),
+      require('../../../assets/images/WOTD/2.png'),
+      // Add more image sources as needed
+    ];
+    useEffect(() => {
+      const interval = setInterval(() => {
+        // Calculate the next image index and wrap around when necessary
+        setImageIndex((prevIndex) => (prevIndex + 1) % images.length);
+      }, 1 * 60 * 60 * 1000); // 3 hours in milliseconds
+  
+      return () => clearInterval(interval);
+    }, []);
+  
 
   const blocks = [
     {
@@ -242,15 +260,37 @@ function openYoutubeApp() {
       )}
 </View>
 <TouchableOpacity onPress={openYoutubeApp} style={styles.liveContainer}>
-<View style={styles.live}>
+{/* <View style={styles.live}>
 <LottieView
 source={require("../../../assets/lottie/99714-go-live.json")}
 style={styles.animation}
 autoPlay
 loop
 />
-</View>
+</View> */}
 </TouchableOpacity>
+<View style={styles.liveContainer} >
+<TouchableOpacity
+style={styles.live2}
+onPress={Announcments}
+ >
+<Image
+source={images[imageIndex]}
+style={[styles.image2, {
+  borderTopLeftRadius: 90,
+  borderTopRightRadius: 90,
+  borderBottomLeftRadius: 90, // Adjust this value as needed
+  borderBottomRightRadius: 90,
+}]}
+resizeMode='contain'
+onPress={() => setModalVisible(true)}
+/>
+</TouchableOpacity>
+
+
+
+</View>
+
 
 
     <View style={[styles.container,]}  onPress={() => setModalVisible(true)} >
@@ -444,6 +484,10 @@ const styles = StyleSheet.create({
     marginLeft: 30,
     marginRight: 30,
   },
+  image2: {
+    width: "100%",
+    height: 200,
+  },
   sliderContainer: {
     height: "75%",
     justifyContent: "center",
@@ -494,6 +538,13 @@ const styles = StyleSheet.create({
     height:100 ,
     width: "90%",
     backgroundColor: '#212931',
+    borderRadius: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  live2: {
+    height:100 ,
+    width: "90%",
     borderRadius: 20,
     justifyContent: 'center',
     alignItems: 'center',
