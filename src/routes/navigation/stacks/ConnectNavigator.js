@@ -17,7 +17,7 @@ import More from '../../../scenes/More'
 import Connect from '../../../scenes/connect'
 import AdrianScreen from '../../../scenes/Adrian/Adrian'
 import VideoPlayerScreen from '../../../scenes/Adrian/VideoPlayera'
-import Announcments from '../../../scenes/Announcments/Announcments'
+import Announcments from '../../../scenes/Announcments/WordOfTheDay'
 const Stack = createStackNavigator()
 const RootStack = createStackNavigator()
 

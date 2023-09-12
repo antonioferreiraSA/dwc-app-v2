@@ -4,7 +4,7 @@ import { HomeTitleContext } from "../../../../context/HomeTitleContext";
 
 import Post from "../../../../scenes/post";
 import Print from "../../../../scenes/print";
-import Announcments from "../../../../scenes/Announcments/Announcments";
+import Announcments from "../../../../scenes/Announcments/WordOfTheDay";
 
 const Stack = createStackNavigator()
 

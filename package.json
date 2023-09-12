@@ -5,7 +5,8 @@
     "ios": "react-native run-ios",
     "start": "react-native start",
     "lint": "node_modules/.bin/eslint src/ --fix src/ --fix",
-    "test": "node_modules/.bin/jest --passWithNoTests"
+    "test": "node_modules/.bin/jest --passWithNoTests",
+    "postinstall": "npx react-native config"
   },
   "dependencies": {
     "@expo/config-plugins": "~6.0.0",
@@ -52,7 +53,7 @@
     "react-dom": "18.2.0",
     "react-native": "0.71.6",
     "react-native-animated-pagination-dot": "^0.4.0",
-    "react-native-config": "^1.5.0",
+    "react-native-config": "^1.5.1",
     "react-native-dialog": "^9.3.0",
     "react-native-elements": "^3.4.2",
     "react-native-gesture-handler": "~2.9.0",
@@ -72,8 +73,10 @@
     "react-native-svg-transformer": "^0.14.3",
     "react-native-tab-view": "^3.1.1",
     "react-native-toast-message": "^2.1.5",
-    "react-native-vector-icons": "^9.2.0",
+    "react-native-vector-icons": "^10.0.0",
     "react-native-video": "^5.2.1",
+    "react-native-video-player": "^0.14.0",
+    "react-native-vlc-media-player": "^1.0.61",
     "react-native-web": "~0.18.11",
     "react-native-webview": "11.26.0",
     "sentry-expo": "^6.1.1"

@@ -9,9 +9,9 @@ const firebaseKey = {
   appId: "1:376216098812:web:15af418e62073558f94479",
   measurementId: "G-N1HJXK9SE6"
 }
-
 const eulaLink = 'https://github.com/kiyohken2000/ReactNative-Expo-Firebase-Boilerplate-v2'
-
 const expoProjectId = '1650611b-a5b8-4420-9656-60c06429edd4'
+const ytkey = 'AIzaSyDRlcySTdfFHGO1RuIdvkFEU40Tuc1TALo';
+const channelID = 'UCJ3J0grUampl4mkzqoBWmAA';
 
-export { defaultAvatar, firebaseKey, eulaLink, expoProjectId }
+export { defaultAvatar, firebaseKey, eulaLink, expoProjectId, ytkey, channelID  }

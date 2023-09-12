@@ -16,7 +16,9 @@ import AdrianScreen from '../../../scenes/Adrian/Adrian'
 import Give from '../../../scenes/Give'
 import BaptismScreen from '../../../scenes/Baptism/Baptism'
 import Volunteer from '../../../scenes/Volunteer/Volunteer'
-import Announcments from '../../../scenes/Announcments/Announcments'
+import WordOfTheDay from '../../../scenes/Announcments/WordOfTheDay'
+import AnnoucmentsPlayer from '../../../scenes/Announcments/AnnoucmentsPlayer'
+
 import SundaySchool from '../../../scenes/SundaySchool/SundaySchool'
 import VideoPlayerScreen from '../../../scenes/Adrian/VideoPlayera'
 const Stack = createStackNavigator()
@@ -110,8 +112,13 @@ const HomeStack = () => {
       }}
     />
     <Stack.Screen
-    name="Announcments"
-    component={Announcments}
+    name="WordOfTheDay"
+    component={WordOfTheDay}
+    options={{ headerShown: false, tabBarVisible: false }}
+  />
+  <Stack.Screen
+    name="AnnouncmentsPlayer"
+    component={AnnoucmentsPlayer}
     options={{ headerShown: false, tabBarVisible: false }}
   />
   <Stack.Screen

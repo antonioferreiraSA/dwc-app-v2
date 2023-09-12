@@ -9,12 +9,18 @@ import {
   Dimensions,
 } from 'react-native';
 import axios from 'axios';
+import { Ionicons } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native'
 
 const StatusComponent = () => {
   const [sliderImages, setSliderImages] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const windowWidth = Dimensions.get('window').width;
   const scrollRef = useRef(null);
+  const navigation = useNavigation()
+  const goHome = () => {
+    navigation.navigate('Home')
+  }
 
   useEffect(() => {
     // Fetch data initially
@@ -93,8 +99,8 @@ const StatusComponent = () => {
     <View style={styles.container}>
       {/* Header */}
       <View style={styles.header}>
-      <TouchableOpacity onPress={handlePrevious}>
-          <Text style={styles.backButton}>Back</Text>
+      <TouchableOpacity onPress={goHome}>
+      <Ionicons name="chevron-back-sharp" size={34} color="white" />
         </TouchableOpacity>
         <View style={styles.headerBlockContainer}>
           {sliderImages.map((_, index) => (
@@ -109,14 +115,13 @@ const StatusComponent = () => {
         </View>
        
       </View>
-
       {/* Status Content */}
       <ScrollView
         horizontal
         pagingEnabled
         showsHorizontalScrollIndicator={false}
         style={{ flex: 1 }}
-        contentContainerStyle={{ width: windowWidth * sliderImages.length }}
+        contentContainerStyle={{ width: windowWidth * sliderImages.length,   }}
         onScroll={e => {
           const offset = e.nativeEvent.contentOffset.x;
           const index = Math.floor(offset / windowWidth);
@@ -126,7 +131,7 @@ const StatusComponent = () => {
       >
         {sliderImages.map((imageUrl, index) => (
           <View key={index} style={{ width: windowWidth }}>
-            <Image source={{ uri: imageUrl }} style={styles.statusImage} />
+            <Image source={{ uri: imageUrl }} style={styles.statusImage} resizeMethod='resize' />
           </View>
         ))}
       </ScrollView>

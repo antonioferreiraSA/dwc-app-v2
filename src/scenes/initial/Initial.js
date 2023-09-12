@@ -47,12 +47,11 @@ export default function Initial() {
     <ScreenTemplate>
       <View style={[styles.container, {backgroundColor: colorScheme.container}]}>
       <LottieView
-      source={require('../../../assets/lottie/loginloader.json')}
+      source={require('../../../assets/lottie/main.json')}
       autoPlay
       loop
       style={[styles.loader, { alignSelf: 'center', width: 200, height: 200 }]}
     />
-        <Text style={[styles.title, {color: colorScheme.text}]}>loading...</Text>
       </View>
     </ScreenTemplate>
   )

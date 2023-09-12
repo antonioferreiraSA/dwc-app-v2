@@ -7,11 +7,13 @@ import {
   TouchableHighlight,
   View,
   Platform,
+  Text
 
 } from 'react-native';
 import { useSafeArea } from 'react-native-safe-area-context'
 import { HeaderHeightContext } from '@react-navigation/stack'
 import { Entypo } from '@expo/vector-icons';
+import { FontAwesome } from '@expo/vector-icons';
 import { Feather, AntDesign } from '@expo/vector-icons';
 import logEvent from '../../../utils/logEvent'
 import * as WebBrowser from 'expo-web-browser';
@@ -147,6 +149,14 @@ onPress={() => {
 
             </View>
           </View>
+          <View style={styles.containersocial}>
+          <Title center style={[styles.heading, {color:colorScheme.text}]}>Our Social Media</Title>
+      <View style={styles.iconContainer}>
+        <FontAwesome name="facebook" style={[styles.icon,{color:colorScheme.text} ]} />
+        <FontAwesome name="instagram"style={[styles.icon,{color:colorScheme.text} ]} />
+        <FontAwesome name="globe" style={[styles.icon,{color:colorScheme.text} ]} />
+      </View>
+    </View>
         </ScrollView>
 
     </View>
@@ -154,6 +164,24 @@ onPress={() => {
 }
 
 const styles = StyleSheet.create({
+  containersocial: {
+    alignItems: 'center',
+    paddingBottom: 30,
+
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 10,
+  },
+  iconContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+  },
+  icon: {
+    fontSize: 40,
+    marginHorizontal: 20,
+  },
 
   image: {
     width: '100%',

@@ -25,17 +25,13 @@ import Colors from '../../../constants/Colors'
 import axios from 'axios';
 import cheerio from 'cheerio';
 
-
-
-
 export default function Home() {
-
-
-
+  
   const deviceWidth = Dimensions.get('window').width;
     const { scheme, toggleScheme  } = useContext(ColorSchemeContext)
     const icon = scheme === 'light' ? 'moon' : 'sun';
     const [imageIndex, setImageIndex] = useState(0);
+    const [loading, setLoading] = useState(true);
     const images = [
       require('../../../assets/images/WOTD/8.png'),
       require('../../../assets/images/WOTD/3.png'),
@@ -132,8 +128,11 @@ function openYoutubeApp() {
   const goEvents = () => {
     navigation.navigate('Events')
   }
-  const Announcments = () => {
-    navigation.navigate('Announcments')
+  const WordOfTheDay = () => {
+    navigation.navigate('WordOfTheDay')
+  }
+  const AnnouncmentsPlayer = () => {
+    navigation.navigate('AnnouncmentsPlayer')
   }
   const goSermons = () => {
     navigation.navigate('Sermons')
@@ -241,6 +240,7 @@ function openYoutubeApp() {
 
   return (
     <ScreenTemplate>
+
       <ScrollView style={styles.main}>
 
       <View style={styles.imageblock}>
@@ -260,19 +260,11 @@ function openYoutubeApp() {
       )}
 </View>
 <TouchableOpacity onPress={openYoutubeApp} style={styles.liveContainer}>
-{/* <View style={styles.live}>
-<LottieView
-source={require("../../../assets/lottie/99714-go-live.json")}
-style={styles.animation}
-autoPlay
-loop
-/>
-</View> */}
 </TouchableOpacity>
 <View style={styles.liveContainer} >
 <TouchableOpacity
 style={styles.live2}
-onPress={Announcments}
+onPress={WordOfTheDay}
  >
 <Image
 source={images[imageIndex]}
@@ -301,6 +293,7 @@ onPress={() => setModalVisible(true)}
           source={{ uri: 'https://mobile.destinyworshipcentre.co.za/wp-content/uploads/2023/04/behnam-norouzi-s-ZlA1cwAPA-unsplash.jpg' }}
           style={styles.image}
         />
+        
         <Text style={[styles.title, { color: colorScheme.text }]}>Weekly Events</Text>
         <Text style={styles.text}>Find Out More</Text>
         </TouchableOpacity>
@@ -369,7 +362,7 @@ onPress={() => setModalVisible(true)}
 <View style={styles.liveContainer} >
 <TouchableOpacity
 style={styles.live}
-onPress={Announcments}
+onPress={AnnouncmentsPlayer}
  >
 <Image
 source={require('../../../assets/images/banner.png')}
